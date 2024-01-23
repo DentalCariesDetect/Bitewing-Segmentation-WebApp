@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 
 const UploadFile = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -73,7 +74,7 @@ const UploadFile = () => {
               </p>
             </object>
           ) : selectedFile?.type === "image/tiff" ? (
-            <img
+            <Image
               src={previewUrl}
               alt="TIFF Preview"
               style={{
@@ -84,7 +85,7 @@ const UploadFile = () => {
               }}
             />
           ) : (
-            <img
+            <Image
               src={previewUrl}
               alt="Preview"
               className="mb-4 max-w-xs rounded-md"
