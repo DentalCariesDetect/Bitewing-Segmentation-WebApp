@@ -39,16 +39,16 @@ export default function Home() {
             className=""
           >
             <div className="text-xl font-normal leading-normal text-white">
-            Discover our innovative solution for automating dental bitewing radiograph analysis using YOLOv8 technology. 
-            Our project focuses on effortlessly segmenting and numbering teeth in radiographs, 
-            streamlining dental diagnostics and enhancing accuracy. With our user-friendly interface and state-of-the-art deep learning model, 
-            dental professionals can save time and reduce human error in tooth identification. 
-            Explore our deployable solution today to revolutionize dental radiograph analysis!
+              Discover our innovative solution for automating dental bitewing radiograph analysis using YOLOv8 technology.
+              Our project focuses on effortlessly segmenting and numbering teeth in radiographs,
+              streamlining dental diagnostics and enhancing accuracy. With our user-friendly interface and state-of-the-art deep learning model,
+              dental professionals can save time and reduce human error in tooth identification.
+              Explore our deployable solution today to revolutionize dental radiograph analysis!
             </div>
 
-            <div className=" mt-5 flex flex-row justify-center space-x-10">
+            <div className=" mt-5 flex flex-col sm:flex sm:flex-row justify-center space-x-10">
               <Link href="/predict/predict1">
-                <button className="h-[51px] w-[300px] rounded-full bg-white shadow-sm shadow-white ">
+                <button className=" w-[300px] sm:w-[250px] lg:w-[250px] h-[51px] xl:w-[300px] rounded-full bg-white shadow-sm shadow-white ">
                   <div className="text-custom text-shadow font-bold leading-normal text-black">
                     START PREDICT
                   </div>
@@ -56,7 +56,7 @@ export default function Home() {
               </Link>
 
               <Link href="/tutorial/tutorial1">
-                <button className="h-[51px] w-[300px] rounded-full bg-white shadow-sm shadow-white">
+                <button className=" w-[300px] sm:w-[250px] lg:w-[250px] h-[51px] xl:w-[300px] rounded-full bg-white shadow-sm shadow-white">
                   <div className="text-custom text-shadow font-bold leading-normal text-black">
                     TUTORIAL
                   </div>
