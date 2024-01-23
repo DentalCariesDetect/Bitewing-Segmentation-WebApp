@@ -39,12 +39,11 @@ export default function Home() {
             className=""
           >
             <div className="text-xl font-normal leading-normal text-white">
-              Convolutional Neural Network (CNN) technology designed to
-              revolutionize the way dental caries (tooth decay) is detected and
-              classified. Our system is engineered to provide rapid, accurate,
-              and user-friendly detection and categorization of dental caries,
-              from early onset to advanced decay, aiding you and your dentist to
-              make the best-informed decisions for your dental treatments.
+            Discover our innovative solution for automating dental bitewing radiograph analysis using YOLOv8 technology. 
+            Our project focuses on effortlessly segmenting and numbering teeth in radiographs, 
+            streamlining dental diagnostics and enhancing accuracy. With our user-friendly interface and state-of-the-art deep learning model, 
+            dental professionals can save time and reduce human error in tooth identification. 
+            Explore our deployable solution today to revolutionize dental radiograph analysis!
             </div>
 
             <div className=" mt-5 flex flex-row justify-center space-x-10">
