@@ -28,7 +28,7 @@ export default function Home() {
             exit="hidden"
             className="text-5xl font-normal leading-normal text-white "
           >
-            Convolution  Neural Network for Dental Caries Classification
+            segmentation and numbering bitewing radiograph using YOLOv8
           </motion.h1>
 
           <motion.div
