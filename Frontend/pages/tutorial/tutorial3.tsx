@@ -10,7 +10,7 @@ export default function Home() {
   return (
     // Full screen background
     <div className="flex flex-col h-screen bg-gradient-background">
-      <Transition />
+      {/* <Transition /> */}
       <div>
         <Navbar />
       </div>
@@ -23,7 +23,7 @@ export default function Home() {
         </Link>
 
         <div className=" flex justify-center items-center flex-col space-y-3">
-          <h1 className="text-2xl font-thin text-center text-white">Third once the file has been uploaded, press the 'START PREDICT' button.</h1>
+          <h1 className="text-2xl font-thin text-center text-white">Third once the file has been uploaded, press the `&apos;`START PREDICT`&apos;` button.</h1>
           <div className="xl:w-[450px] xl:h-[400px] sm:w-full sm:h-[450px] bg-white rounded-2xl">
             <div className=" rounded-full shadow-white shadow-sm flex justify-center items-center h-full w-full">
               <Image
@@ -67,7 +67,7 @@ export default function Home() {
 
       </div>
 
-      
+
     </div>
   );
 }

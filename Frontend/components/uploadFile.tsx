@@ -51,11 +51,11 @@ const UploadFile = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-6 bg-white rounded-lg shadow-md">
+    <div className="flex flex-col items-center justify-center p-6 bg-indigo-600 rounded-lg shadow-md">
       <input
         type="file"
         onChange={handleFileChange}
-        className="mb-4 block w-full px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded-md focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+        className="mb-4 block w-full px-4 py-2 text-sm text-gray-700 bg-indigo-300 0 rounded-md focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200 focus:ring-opacity-50"
         accept="image/png, image/jpeg, image/tiff, application/pdf"
       />
       {previewUrl && (
@@ -95,9 +95,9 @@ const UploadFile = () => {
       )}
       <button
         onClick={handleUpload}
-        className=" mt-5 px-6 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+        className=" mt-5 px-6 py-2 text-black bg-white rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
       >
-        Upload File
+        START PREDICT
       </button>
     </div>
   );

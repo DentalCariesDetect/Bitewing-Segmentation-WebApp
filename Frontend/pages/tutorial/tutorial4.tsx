@@ -10,7 +10,7 @@ export default function Home() {
   return (
     // Full screen background
     <div className="flex flex-col h-screen bg-gradient-background">
-      <Transition />
+      {/* <Transition /> */}
       <div>
         <Navbar />
       </div>
@@ -23,7 +23,7 @@ export default function Home() {
         </Link>
 
         <div className=" flex justify-center items-center flex-col space-y-3">
-          <h1 className="text-2xl font-thin text-center text-white">After pressing the 'Start Prediction' button, it will display details of identifying the tooth positions at various points, completing the usage.</h1>
+          <h1 className="text-2xl font-thin text-center text-white">After pressing the `&apos;`Start Prediction`&apos;` button, it will display details of identifying the tooth positions at various points, completing the usage.</h1>
           <div className=" w-[450px] h-[400px] bg-white rounded-2xl">
             <div className=" rounded-full shadow-white shadow-sm flex justify-center items-center h-full w-full">
               <Image
@@ -52,7 +52,7 @@ export default function Home() {
 
             <Link href="/predict/predict1" className="sm:visible xl:invisible">
               <div className="rounded-full bg-white sm:visible xl:invisible flex justify-center items-center sm:h-[100px] sm:w-[140px]">
-              Get Start
+                Get Start
               </div>
             </Link>
           </div>
@@ -67,7 +67,7 @@ export default function Home() {
 
       </div>
 
-      
+
     </div>
   );
 }

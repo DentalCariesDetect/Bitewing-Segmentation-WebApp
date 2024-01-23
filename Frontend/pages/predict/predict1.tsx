@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Inter } from "next/font/google";
 import UploadFile from "@/components/uploadFile";
 import Navbar from "@/components/Navbar";
@@ -13,9 +12,9 @@ export default function Home() {
       <div>
         <Navbar />
       </div>
-    <div className="bg-gradient-background h-screen flex items-center justify-center">
-      <UploadFile />
-    </div>
+      <div className="bg-gradient-background h-screen flex items-center justify-center">
+        <UploadFile />
+      </div>
     </div>
   );
 }

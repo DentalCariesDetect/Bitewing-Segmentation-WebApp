@@ -20,17 +20,17 @@ export default function Home() {
         <Navbar />
       </div>
       <div className=" lg:grid lg:grid-cols-2">
-        <div className=" ml-20 flex flex-col">
+        <div className=" ml-20 lg:mr-0 mr-20 flex flex-col">
           <motion.h1
             variants={fadeIn('right', 0.5)}
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="text-5xl font-normal leading-normal text-white "
+            className="text-5xl font-thin leading-normal text-white "
           >
-            segmentation and numbering bitewing radiograph using YOLOv8
+            Segmentation bitewing radiograph using <span className=' font-normal text-red-600'> YOLOv8 </span>
           </motion.h1>
-
+          {/* and numbering bitewing radiograph */}
           <motion.div
             variants={fadeIn('right', 0.5)}
             initial="hidden"
@@ -38,7 +38,7 @@ export default function Home() {
             exit="hidden"
             className=""
           >
-            <div className="text-xl font-normal leading-normal text-white">
+            <div className="text-xl font-thin leading-normal text-white">
               Discover our innovative solution for automating dental bitewing radiograph analysis using YOLOv8 technology.
               Our project focuses on effortlessly segmenting and numbering teeth in radiographs,
               streamlining dental diagnostics and enhancing accuracy. With our user-friendly interface and state-of-the-art deep learning model,
@@ -46,9 +46,9 @@ export default function Home() {
               Explore our deployable solution today to revolutionize dental radiograph analysis!
             </div>
 
-            <div className=" mt-5 flex flex-col sm:flex sm:flex-row justify-center space-x-10">
+            <div className=" translate-x-5 mt-5 flex flex-col justify-center items-center space-y-5 sm:space-y-0 sm:flex sm:flex-row  space-x-10 ">
               <Link href="/predict/predict1">
-                <button className=" w-[300px] sm:w-[250px] lg:w-[250px] h-[51px] xl:w-[300px] rounded-full bg-white shadow-sm shadow-white ">
+                <button className=" w-[300px] sm:w-[250px] lg:w-[250px] h-[51px] xl:w-[300px] rounded-full bg-white shadow-sm shadow-white transform motion-safe:hover:scale-110 duration-500">
                   <div className="text-custom text-shadow font-bold leading-normal text-black">
                     START PREDICT
                   </div>
@@ -56,7 +56,7 @@ export default function Home() {
               </Link>
 
               <Link href="/tutorial/tutorial1">
-                <button className=" w-[300px] sm:w-[250px] lg:w-[250px] h-[51px] xl:w-[300px] rounded-full bg-white shadow-sm shadow-white">
+                <button className=" -translate-x-5 sm:translate-x-0 w-[300px] sm:w-[250px] lg:w-[250px] h-[51px] xl:w-[300px] rounded-full bg-white shadow-sm shadow-white transform motion-safe:hover:scale-110 duration-500">
                   <div className="text-custom text-shadow font-bold leading-normal text-black">
                     TUTORIAL
                   </div>
@@ -66,7 +66,12 @@ export default function Home() {
           </motion.div>
         </div>
 
-        <div className="flex items-center justify-center">
+        <motion.div
+          variants={fadeIn('left', 0.5)}
+          initial="hidden"
+          animate="show"
+          exit="hidden"
+          className="flex items-center justify-center">
           <Image
             className=" hidden items-center justify-center rounded-2xl lg:flex "
             src="/image/dentistDoJob.png"
@@ -74,18 +79,18 @@ export default function Home() {
             width={500}
             height={500}
           />
-        </div>
+        </motion.div>
       </div>
-      <div className=" grid-cols-10 ">
+      <div className="grid-cols-10  mb-10 flex justify-center">
         <motion.div
           variants={fadeIn('up', 0.5)}
           initial="hidden"
           animate="show"
           exit="hidden"
-          className=" xl:flex-rows col-span-9 ml-20 mr-20 mt-10 justify-center space-x-28 md:grid md:grid-cols-2 xl:flex "
+          className=" xl:flex-rows col-span-9  mr-20 mt-10 justify-center space-x-28 md:grid md:grid-cols-2 xl:flex "
         >
           {/* box1 */}
-          <div className="mb-10 h-[280px] w-[350px] rounded-3xl bg-white bg-opacity-70 shadow-lg shadow-white">
+          <div className="ml-28  h-[280px] w-[350px] rounded-3xl bg-white bg-opacity-70 shadow-lg shadow-white transform motion-safe:hover:scale-110 duration-500 mb-10">
             <h1 className="mt-5 text-center text-2xl text-black opacity-100">
               Privacy-Centric
             </h1>
@@ -104,7 +109,7 @@ export default function Home() {
             </div>
           </div>
           {/* box2 */}
-          <div className="h-[280px] w-[350px] rounded-3xl bg-white bg-opacity-70 shadow-lg shadow-white">
+          <div className="h-[280px] w-[350px] rounded-3xl bg-white bg-opacity-70 shadow-lg shadow-white transform motion-safe:hover:scale-110 duration-500 lg:mr-0 sm:mr-20 mb-10">
             <h1 className="mt-5 text-center text-2xl text-black">
               Easy Accessibility
             </h1>
@@ -123,7 +128,7 @@ export default function Home() {
             </div>
           </div>
           {/* box3 */}
-          <div className="h-[280px] w-[350px] rounded-3xl bg-white bg-opacity-70 shadow-lg shadow-white">
+          <div className="h-[280px] w-[350px] rounded-3xl bg-white bg-opacity-70 shadow-lg shadow-white transform motion-safe:hover:scale-110 duration-500 mb-10">
             <h1 className="mt-5 text-center text-2xl text-black">
               Support for Dental
             </h1>
@@ -143,7 +148,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className=" right-24 flex items-end justify-end">
+          <div className=" hidden right-24 lg:flex items-end justify-end">
             <Image
               className=" "
               src="/image/tooth.png"

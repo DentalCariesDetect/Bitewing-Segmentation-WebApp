@@ -8,8 +8,9 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   return (
     // Full screen background
+
     <div className="flex flex-col h-screen w-screen bg-gradient-background">
-      <Transition />
+      {/* <Transition /> */}
       <div>
         <Navbar />
       </div>
@@ -31,11 +32,11 @@ export default function Home() {
 
           <div className="xl:w-[450px] xl:h-[400px] sm:w-full sm:h-[450px] bg-white rounded-2xl">
             <div className=" rounded-full shadow-white shadow-sm flex justify-center items-center h-full w-full">
-              
+
               <div className="bg-white w-[200px] h-[50px] text-black text-custom rounded-full font-bold leading-normal text-shadow text-center flex flex-cols justify-center ">
                 <h1 className="h-full flex justify-center items-center font-thin">UPLOAD <br />Bitewing X-ray</h1>
               </div>
-              
+
             </div>
           </div>
 
@@ -73,7 +74,7 @@ export default function Home() {
 
       </div>
 
-      
+
     </div>
   );
 }
