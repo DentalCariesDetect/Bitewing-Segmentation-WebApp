@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import Image from "next/image";
+import ImageTable from "./ImageTable";
 
 const UploadFile = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [listCropImg, setListCropImg] = useState<string[] | null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files ? event.target.files[0] : null;
@@ -43,15 +45,24 @@ const UploadFile = () => {
         // Assuming `responseData.crop_img` is the base64 string of the cropped image
         // Convert base64 string to an image and set it for preview
         setPreviewUrl(`data:image/jpeg;base64,${responseData.crop_img}`);
+        // console.log(responseData.list_crop_img);
+        if (Array.isArray(responseData.list_crop_img)) {
+          const formattedList = responseData.list_crop_img.map((img: string) => `data:image/jpeg;base64,${img}`);
+          setListCropImg(formattedList);
+        }
+
       }
+
     } catch (error) {
       console.error("Error during file upload:", error);
       alert("There was an error uploading the file.");
     }
+
   };
 
   return (
     <div className="flex flex-col items-center justify-center p-6 bg-indigo-600 rounded-lg shadow-md">
+
       <input
         type="file"
         onChange={handleFileChange}
@@ -77,6 +88,8 @@ const UploadFile = () => {
             <Image
               src={previewUrl}
               alt="TIFF Preview"
+              width={500}
+              height={500}
               style={{
                 width: "auto",
                 height: "auto",
@@ -87,19 +100,30 @@ const UploadFile = () => {
           ) : (
             <Image
               src={previewUrl}
+              width={500}
+              height={500}
               alt="Preview"
               className="mb-4 max-w-xs rounded-md"
             />
           )}
         </div>
       )}
+      <div>
+        <ImageTable
+          images={listCropImg ?? []}
+        />
+
+      </div>
+
       <button
         onClick={handleUpload}
         className=" mt-5 px-6 py-2 text-black bg-white rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
       >
         START PREDICT
       </button>
+
     </div>
+
   );
 };
 
