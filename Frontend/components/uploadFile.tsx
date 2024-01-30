@@ -109,9 +109,9 @@ const UploadFile = () => {
         </div>
       )}
       <div>
-        <ImageTable
+        {/* <ImageTable
           images={listCropImg ?? []}
-        />
+        /> */}
 
       </div>
 

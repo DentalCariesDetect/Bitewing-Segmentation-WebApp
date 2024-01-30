@@ -21,9 +21,9 @@ const ImageTable: React.FC<ImageTableProps> = ({ images }) => {
     return (
         <div className="bg-indigo-600 p-4">
             <div>
-                <div className=" grid grid-cols-6">
+                <div className=" ">
                     {images.map((img, index) => (
-                        <div key={index} className="flex items-center mb-4 ">
+                        <div key={index} className="flex  mb-4 border border-white w-80 p-3 rounded-lg">
                             <input
                                 type="checkbox"
                                 checked={selectedImages[index] || false} // Handle potential undefined values
@@ -37,6 +37,12 @@ const ImageTable: React.FC<ImageTableProps> = ({ images }) => {
                                 height={100}
                                 className="max-w-xs rounded-md"
                             />
+                            <div className=" w-full ml-2">
+                                <h1>Class 31</h1>
+                                <p>confident : 0.99</p>
+                            </div>
+                            <button className="flex justify-end items-end underline">แก้ไข</button>
+
                         </div>
                     ))}
                 </div>
