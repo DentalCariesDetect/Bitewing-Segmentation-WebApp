@@ -15,15 +15,15 @@ export default function Home() {
         <Navbar />
       </div>
 
-      <div className="flex justify-between items-center flex-row space-y-3 h-screen m-16">
-        <Link href="/tutorial/tutorial2" className="sm:invisible xl:visible">
+      <div className="flex justify-between items-center flex-row space-y-3 h-screen lg:m-16 sm:m-8 nn:m-2">
+        <Link href="/tutorial/tutorial2" className="sm:invisible xl:visible nn:invisible">
           <div className="rounded-full bg-white xl:w-24 xl:h-24 sm:invisible xl:visible flex justify-center items-center">
             Previous
           </div>
         </Link>
 
         <div className=" flex justify-center items-center flex-col space-y-3">
-          <h1 className="text-2xl font-thin text-center text-white">Third once the file has been uploaded, press the `&apos;`START PREDICT`&apos;` button.</h1>
+          <h1 className="text-2xl nn:text-sm font-thin text-center text-white">Third once the file has been uploaded, press the `&apos;`START PREDICT`&apos;` button.</h1>
           <div className="xl:w-[450px] xl:h-[400px] sm:w-full sm:h-[450px] bg-white rounded-2xl">
             <div className=" rounded-full shadow-white shadow-sm flex justify-center items-center h-full w-full">
               <Image
@@ -35,7 +35,7 @@ export default function Home() {
               />
             </div>
           </div>
-          <div className="w-[450px] h-8 bg-white rounded-xl">
+          <div className="w-[450px] h-8 bg-white rounded-xl nn:w-full">
             <h1 className="h-full flex justify-center items-center font-thin">FileBitewing.tiff</h1>
           </div>
 
@@ -44,14 +44,14 @@ export default function Home() {
           </div>
 
           <div className="flex justify-between p-8 w-11/12">
-            <Link href="/tutorial/tutorial3" className="sm:visible xl:invisible">
-              <div className="rounded-full bg-white sm:visible xl:invisible flex justify-center items-center sm:h-[100px] sm:w-[140px]">
+            <Link href="/tutorial/tutorial2" className="sm:visible xl:invisible">
+              <div className="rounded-full bg-white sm:visible xl:invisible flex justify-center items-center sm:h-[100px] sm:w-[140px] nn:px-4 nn:py-2">
                 Previous
               </div>
             </Link>
 
             <Link href="/tutorial/tutorial4" className="sm:visible xl:invisible">
-              <div className="rounded-full bg-white sm:visible xl:invisible flex justify-center items-center sm:h-[100px] sm:w-[140px]">
+              <div className="rounded-full bg-white sm:visible xl:invisible flex justify-center items-center sm:h-[100px] sm:w-[140px] nn:px-4 nn:py-2">
                 Next
               </div>
             </Link>
@@ -59,7 +59,7 @@ export default function Home() {
 
         </div>
 
-        <Link href="/tutorial/tutorial4" className="sm:invisible xl:visible">
+        <Link href="/tutorial/tutorial4" className="nn:invisible sm:invisible xl:visible">
           <div className="rounded-full bg-white xl:w-24 xl:h-24 sm:invisible xl:visible flex justify-center items-center">
             Next
           </div>

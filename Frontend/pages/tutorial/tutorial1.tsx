@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   return (
     // Full screen background
-    <div className="flex flex-col h-screen bg-gradient-background">
+    <div className="flex flex-col h-screen w-screen bg-gradient-background">
       <Transition />
 
       <div className="sticky top-0">
@@ -18,22 +18,22 @@ export default function Home() {
       <div className="flex justify-between items-center flex-row space-y-3 h-screen lg:m-16 sm:m-8">
 
 
-        <div className="rounded-full bg-white xl:w-24 xl:h-24 invisible flex justify-center items-center">
+        <div className="rounded-full bg-white invisible flex justify-center items-center xl:w-24 xl:h-24">
           invisible
         </div>
 
 
         <div className="flex justify-center items-center flex-col space-y-3">
 
-          <h1 className="text-2xl font-thin text-white">
+          <h1 className="sm:text-2xl nn:text-lg font-thin text-white">
             First Press the &quot;Start Prediction&quot; button on our webpage.
           </h1>
 
-          <div className="xl:w-[450px] xl:h-[400px] sm:w-full sm:h-[450px] bg-white rounded-2xl">
+          <div className="bg-white rounded-2xl xl:w-[450px] xl:h-[400px] sm:w-full sm:h-[450px] nn:w-full nn:py-24">
             <div className=" rounded-full shadow-white shadow-sm flex justify-center items-center h-full w-full">
 
-              <div className="bg-slate-300 w-[200px] h-[50px] text-black text-custom rounded-full font-bold leading-normal text-shadow text-center flex justify-center ">
-                <h1 className="h-full flex justify-center items-center">START PREDICT</h1>
+              <div className="bg-slate-300 w-[200px] h-[50px] nn:w-[150px] nn:h-[35px] text-black text-custom rounded-full font-bold leading-normal text-shadow text-center flex justify-center ">
+                <h1 className="h-full flex justify-center items-center nn:text-xs">START PREDICT</h1>
               </div>
 
             </div>
@@ -41,13 +41,13 @@ export default function Home() {
 
           <div className="flex justify-between p-8 w-11/12 mt-1">
             <Link href="/tutorial/tutorial1" className="invisible">
-              <div className="rounded-full bg-white invisible flex justify-center items-center sm:h-[66px] sm:w-[82px]">
+              <div className="rounded-full bg-white invisible flex justify-center items-center nn:px-4 nn:py-2">
                 Next
               </div>
             </Link>
 
             <Link href="/tutorial/tutorial2" className="sm:visible xl:invisible">
-              <div className="rounded-full bg-white sm:visible xl:invisible flex justify-center items-center sm:h-[100px] sm:w-[140px]">
+              <div className="rounded-full bg-white nn:visible sm:visible xl:invisible flex justify-center items-center sm:h-[100px] sm:w-[140px] nn:px-4 nn:py-2">
                 Next
               </div>
             </Link>
@@ -56,8 +56,8 @@ export default function Home() {
 
         </div>
 
-        <Link href="/tutorial/tutorial3" className="sm:invisible xl:visible">
-          <div className="rounded-full bg-white xl:w-24 xl:h-24 sm:invisible xl:visible flex justify-center items-center">
+        <Link href="/tutorial/tutorial2" className="nn:invisible sm:invisible md:invisible xl:visible">
+          <div className="rounded-full bg-white xl:w-24 xl:h-24 flex justify-center items-center">
             Next
           </div>
         </Link>

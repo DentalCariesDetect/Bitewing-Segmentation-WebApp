@@ -20,6 +20,7 @@ const config: Config = {
       },
     },
     screens: {
+      'nn': '1px',
       'sm': '640px',
       // => @media (min-width: 640px) { ... }
 
