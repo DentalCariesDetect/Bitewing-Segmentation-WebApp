@@ -11,7 +11,7 @@ interface DropdownProps {
 const Dropdown: React.FC<DropdownProps> = ({ options, selectedOption, onOptionChange }) => {
     return (
         <select
-            className="rounded-md px-5 py-2 bg-inherit border mb-6"
+            className="rounded-md px-4 py-1 border mb-6"
             value={selectedOption}
             onChange={(e) => onOptionChange(e.target.value)}
             required

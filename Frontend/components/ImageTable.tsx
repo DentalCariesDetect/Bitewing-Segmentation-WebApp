@@ -51,8 +51,11 @@ const ImageTable: React.FC<ImageTableProps> = ({ images }) => {
                     {/* Dropdown example code */}
                     <div className=" flex flex-row space-x-3">
                         <h1 className=" text-center flex justify-center ">Carious Diagnosis</h1>
-                        <select
-                            className="rounded-md px-5 py-2 bg-inherit border mb-6 "
+                        {/* <Dropdown
+                            options={['RA1','RA2','RA3','RA4','RA5','RA6','RA7']}
+                        /> */}
+                        {/* <select
+                            className="rounded-md px-5 py-2 bg-inherit border mb-6"
                             required
                         >
                             <option value="ra1">RA1</option>
@@ -61,7 +64,7 @@ const ImageTable: React.FC<ImageTableProps> = ({ images }) => {
                             <option value="rb4">RB4</option>
                             <option value="rc5">RC5</option>
                             <option value="rd6">RD6</option>
-                        </select>
+                        </select> */}
                     </div>
                     {/* <Dropdown options={["RA1", "RA2", "RA3", "RB4", "RC5", "RD6"]} selectedOption="RA1" onOptionChange={(newOption) => console.log(newOption)} /> */}
 
