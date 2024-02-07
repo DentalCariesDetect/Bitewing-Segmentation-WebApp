@@ -1,0 +1,6 @@
+github.com/spf13/viper
+-u gorm.io/gorm
+-u gorm.io/driver/postgres
+github.com/labstack/echo/v4
+github.com/labstack/echo/v4/middleware"
+github.com/labstack/gommon/log

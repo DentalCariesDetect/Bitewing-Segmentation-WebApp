@@ -1,0 +1,13 @@
+app:
+  server:
+    port: 5000
+
+database:
+  host: 0.0.0.0
+  port: 5432
+  user: admin
+  password: 1234
+  dbname: segmentation
+  sslmode: disable
+  timezone: Asia/Bangkok
+
