@@ -47,7 +47,7 @@ export default function Home() {
             </div>
 
             <div className=" translate-x-5 mt-5 flex flex-col justify-center items-center space-y-5 sm:space-y-0 sm:flex sm:flex-row  space-x-10 ">
-              <Link href="/predict/predict1">
+              <Link href="/predict/">
                 <button className=" w-[300px] sm:w-[250px] lg:w-[250px] h-[51px] xl:w-[300px] rounded-full bg-white shadow-sm shadow-white transform motion-safe:hover:scale-110 duration-500">
                   <div className="text-custom text-shadow font-bold leading-normal text-black">
                     START PREDICT
@@ -81,7 +81,7 @@ export default function Home() {
           />
         </motion.div>
       </div>
-      <div className="grid-cols-10  mb-10 flex justify-center">
+      <div className="grid-cols-10 flex justify-center">
         <motion.div
           variants={fadeIn('up', 0.5)}
           initial="hidden"
@@ -90,7 +90,7 @@ export default function Home() {
           className=" xl:flex-rows col-span-9  mr-20 mt-10 justify-center space-x-28 md:grid md:grid-cols-2 xl:flex "
         >
           {/* box1 */}
-          <div className="ml-28  h-[280px] w-[350px] rounded-3xl bg-white bg-opacity-70 shadow-lg shadow-white transform motion-safe:hover:scale-110 duration-500 mb-10">
+          <div className="ml-28  h-[280px] w-[350px] rounded-3xl bg-white bg-opacity-70 shadow-lg shadow-white transform motion-safe:hover:scale-110 duration-500 mb-10 xl:ml-64 ">
             <h1 className="mt-5 text-center text-2xl text-black opacity-100">
               Privacy-Centric
             </h1>
@@ -148,7 +148,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className=" hidden right-24 lg:flex items-end justify-end">
+          <div className=" hidden right-24 lg:flex items-end justify-end p-10  xl:-translate-x-20">
             <Image
               className=" "
               src="/image/tooth.png"

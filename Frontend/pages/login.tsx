@@ -8,13 +8,12 @@ export default function Login() {
         <div className="w-full h-screen">
 
             <div className="bg-gradient-background h-full flex items-center justify-center">
-                <div className=" w-[500px] h-[600px] rounded-lg ">
+                <div className=" w-[500px] h-[600px] rounded-lg border-white">
                     <div className="flex justify-center items-center h-[100px]">
                         <h1 className="text-4xl font-bold">Login</h1>
                     </div>
                     <form
-                        className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
-
+                        className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground border-white border p-14 rounded-xl"
                     >
                         <label className="text-md" htmlFor="email">
                             Email

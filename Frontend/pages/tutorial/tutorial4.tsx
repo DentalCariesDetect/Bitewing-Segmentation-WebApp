@@ -50,7 +50,7 @@ export default function Home() {
               </div>
             </Link>
 
-            <Link href="/predict/predict1" className="sm:visible xl:invisible">
+            <Link href="/predict/" className="sm:visible xl:invisible">
               <div className="rounded-full bg-white sm:visible xl:invisible flex justify-center items-center sm:h-[100px] sm:w-[140px]">
                 Get Start
               </div>
@@ -59,7 +59,7 @@ export default function Home() {
 
         </div>
 
-        <Link href="/predict/predict1" className="sm:invisible xl:visible">
+        <Link href="/predict/" className="sm:invisible xl:visible">
           <div className="rounded-full bg-white xl:w-24 xl:h-24 sm:invisible xl:visible flex justify-center items-center">
             Get Start
           </div>

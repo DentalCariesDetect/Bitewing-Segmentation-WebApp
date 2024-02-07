@@ -23,7 +23,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link href="../predict/predict1">
+              <Link href="../predict/">
                 <div className="text-gray-300 hover:text-white">PREDICT</div>
               </Link>
             </li>

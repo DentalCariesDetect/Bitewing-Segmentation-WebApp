@@ -61,7 +61,7 @@ const UploadFile = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-6 bg-indigo-600 rounded-lg shadow-md">
+    <div className="flex flex-col items-center justify-center p-6 bg-indigo-600 rounded-lg shadow-md mb-5">
 
       <input
         type="file"
