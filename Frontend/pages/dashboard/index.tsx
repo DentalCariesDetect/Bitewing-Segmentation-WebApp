@@ -11,6 +11,9 @@ export default function profileSetting() {
             <Transition />
             <div className="bg-gradient-background h-full flex items-center justify-between">
                 <SideBar />
+                <div>
+
+                </div>
             </div>
         </div>
 
