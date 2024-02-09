@@ -1,4 +1,5 @@
-import Navbar from "@/components/Navbar";
+import NavbarDesktop from "@/components/NavbarDesktop";
+import NavbarMobile from "@/components/NavbarMobile";
 import Transition from "@/components/Transitions";
 import { Inter } from "next/font/google";
 import Link from "next/link";
@@ -12,7 +13,12 @@ export default function Home() {
       <Transition />
 
       <div className="sticky top-0">
-        <Navbar />
+        <div className="block md:hidden">
+          <NavbarMobile />
+        </div>
+        <div className="hidden md:block">
+          <NavbarDesktop />
+        </div>
       </div>
 
       <div className="flex justify-between items-center flex-row space-y-3 h-screen lg:m-16 sm:m-8">

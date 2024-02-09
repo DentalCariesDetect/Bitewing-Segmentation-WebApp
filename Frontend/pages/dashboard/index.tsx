@@ -13,6 +13,7 @@ export default function profileSetting() {
                 <SideBar />
                 <div>
 
+
                 </div>
             </div>
         </div>

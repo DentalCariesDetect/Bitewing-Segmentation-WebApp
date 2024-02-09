@@ -20,7 +20,7 @@ const ImageTable: React.FC<ImageTableProps> = ({ images }) => {
     };
 
     return (
-        <div className="bg-indigo-600 p-4">
+        <div className="bg-indigo-600 p-4 w-full ">
             <div className="flex flex-row space-x-5">
                 <div className=" ">
                     {images.map((img, index) => (
@@ -67,21 +67,21 @@ const ImageTable: React.FC<ImageTableProps> = ({ images }) => {
 
 
                     {/* Description box */}
-                    <div>
+                    <div className=" sm:w-[400px] w-full">
                         <h1>Description</h1>
-                        {/* multiple line input */}
+                        {/* multiple line input4*/}
                         <textarea
-                            className="rounded-md px-5 py-2 bg-inherit border mb-6 h-80 w-[400px]"
+                            className="rounded-md px-5 py-2 bg-inherit border mb-6 h-80 w-full"
                             placeholder="Description"
                             required
                         />
                     </div>
 
-                    <div>
+                    <div className=" sm:w-[400px] w-full">
                         <h1>Treatment approach</h1>
                         {/* multiple line input */}
                         <textarea
-                            className="rounded-md px-5 py-2 bg-inherit border mb-6 h-80 w-[400px]"
+                            className="rounded-md px-5 py-2 bg-inherit border mb-6 h-80 w-full"
                             placeholder="Treatment approach"
                             required
                         />

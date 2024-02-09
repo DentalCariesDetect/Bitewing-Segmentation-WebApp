@@ -1,8 +1,10 @@
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/NavbarMobile";
 import Image from 'next/image';
 import Transition from "@/components/fastTransition";
 import { Inter } from "next/font/google";
 import Link from "next/link";
+import NavbarMobile from "@/components/NavbarMobile";
+import NavbarDesktop from "@/components/NavbarDesktop";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,8 +13,13 @@ export default function Home() {
     // Full screen background
     <div className="flex flex-col h-screen bg-gradient-background">
       {/* <Transition /> */}
-      <div>
-        <Navbar />
+      <div className="sticky top-0">
+        <div className="block md:hidden">
+          <NavbarMobile />
+        </div>
+        <div className="hidden md:block">
+          <NavbarDesktop />
+        </div>
       </div>
 
       <div className="flex justify-between items-center flex-row space-y-3 h-screen m-16">

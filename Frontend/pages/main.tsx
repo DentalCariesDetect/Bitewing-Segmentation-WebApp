@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import Navbar from '@/components/Navbar';
 import { motion } from 'framer-motion';
 import { fadeIn } from '@/variants';
 import Transition from '@/components/Transitions';
+import NavbarMobile from '@/components/NavbarMobile';
+import NavbarDesktop from '@/components/NavbarDesktop';
 
 // import HoverCard from "@/components/HoverCard";
 // import Modal from "@/components/Modal";
@@ -16,8 +17,11 @@ export default function Home() {
     <div className="h-full bg-gradient-background ">
       <Transition />
       {/* Navbar  */}
-      <div>
-        <Navbar />
+      <div className="block md:hidden">
+        <NavbarMobile />
+      </div>
+      <div className="hidden md:block">
+        <NavbarDesktop />
       </div>
       <div className=" lg:grid lg:grid-cols-2">
         <div className=" ml-20 lg:mr-0 mr-20 flex flex-col">
@@ -90,7 +94,7 @@ export default function Home() {
           className=" xl:flex-rows col-span-9  mr-20 mt-10 justify-center space-x-28 md:grid md:grid-cols-2 xl:flex "
         >
           {/* box1 */}
-          <div className="ml-28  h-[280px] w-[350px] rounded-3xl bg-white bg-opacity-70 shadow-lg shadow-white transform motion-safe:hover:scale-110 duration-500 mb-10 xl:ml-64 ">
+          <div className="ml-28   h-[280px] w-[350px] rounded-3xl bg-white bg-opacity-70 shadow-lg shadow-white transform motion-safe:hover:scale-110 duration-500 mb-10 xl:ml-64 ">
             <h1 className="mt-5 text-center text-2xl text-black opacity-100">
               Privacy-Centric
             </h1>
@@ -109,7 +113,7 @@ export default function Home() {
             </div>
           </div>
           {/* box2 */}
-          <div className="h-[280px] w-[350px] rounded-3xl bg-white bg-opacity-70 shadow-lg shadow-white transform motion-safe:hover:scale-110 duration-500 lg:mr-0 sm:mr-20 mb-10">
+          <div className="h-[280px] w-[350px] rounded-3xl bg-white bg-opacity-70 shadow-lg shadow-white transform motion-safe:hover:scale-110 duration-500  lg:mr-0 sm:mr-20 mb-10">
             <h1 className="mt-5 text-center text-2xl text-black">
               Easy Accessibility
             </h1>

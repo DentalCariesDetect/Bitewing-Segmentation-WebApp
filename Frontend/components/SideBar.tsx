@@ -114,7 +114,7 @@ export function SideBar() {
                 </Accordion> */}
                 {/* <hr className="my-2 border-blue-gray-50" /> */}
                 {/* Home */}
-                <Link href="../main">
+                <Link href="../dashboard">
                     <ListItem className="text-gray-100 bg-blue-900">
                         <ListItemPrefix className=" mr-2">
                             <HomeIcon className="h-5 w-5" />
