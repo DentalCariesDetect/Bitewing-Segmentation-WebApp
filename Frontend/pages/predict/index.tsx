@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
-    <div className="h-full ">
+    <div className="h-full">
       <Transition />
       <div className="block md:hidden">
         <NavbarMobile />
@@ -44,7 +44,7 @@ export default function Home() {
             <p className="">วันนี้</p>
           </div>
         </div >
-        <div className="flex w-full items-center justify-center sm:w-[500px]">
+        <div className="flex w-full items-center justify-center ">
           <UploadFile />
         </div>
 

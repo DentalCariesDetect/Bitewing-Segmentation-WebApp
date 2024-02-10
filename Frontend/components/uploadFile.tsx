@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import ImageTable from "./ImageTable";
+import Loading from "./Loading";
 
 const UploadFile = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [listCropImg, setListCropImg] = useState<string[] | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files ? event.target.files[0] : null;
     setSelectedFile(file);
 
     if (file) {
-      const fileType = file.type;
-      // Immediately convert the file to a URL and set it for preview
+      // Immediately convert the file to a URL and set it for preview   const fileType = file.type;
+
       const url = URL.createObjectURL(file);
       setPreviewUrl(url);
     } else {
@@ -21,7 +23,19 @@ const UploadFile = () => {
     }
   };
 
+
+  if (isLoading) {
+    return (
+      <div className="w-full h-screen">
+        <Loading isOpen={true} />
+      </div>
+    )
+  }
+
+
   const handleUpload = async () => {
+
+    setIsLoading(true);
     if (!selectedFile) {
       alert("No file selected!");
       return;
@@ -31,6 +45,7 @@ const UploadFile = () => {
     formData.append("file", selectedFile);
 
     try {
+
       const response = await fetch("http://127.0.0.1:8000/api/crop", {
         method: "POST",
         body: formData,
@@ -56,12 +71,15 @@ const UploadFile = () => {
     } catch (error) {
       console.error("Error during file upload:", error);
       alert("There was an error uploading the file.");
-    }
+    } finally {
+      setIsLoading(false);
 
+    }
   };
 
   return (
-    <div className=" w-[350px] sm:w-[500px] flex flex-col items-center justify-center p-6 bg-indigo-600 rounded-lg shadow-md mb-5 ">
+
+    <div className=" m-5 w-full sm:w-[800px] flex flex-col items-center justify-center p-6 bg-indigo-600 rounded-lg shadow-md mb-5 ">
 
       <input
         type="file"
@@ -126,5 +144,6 @@ const UploadFile = () => {
 
   );
 };
+
 
 export default UploadFile;
