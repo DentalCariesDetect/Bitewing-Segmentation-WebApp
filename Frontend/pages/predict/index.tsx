@@ -6,7 +6,7 @@ import NavbarDesktop from "@/components/NavbarDesktop";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export default function Predict() {
   return (
     <div className="h-full">
       <Transition />

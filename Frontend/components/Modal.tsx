@@ -1,16 +1,16 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { FiAlertCircle } from "react-icons/fi";
-import { useState } from "react";
 
 interface ModalProps {
   title: string;
   message: string;
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onUnderstood: () => void;
 }
 
 
-const Modal: React.FC<ModalProps> = ({ title, message, isOpen, setIsOpen }) => {
+const Modal: React.FC<ModalProps> = ({ title, message, isOpen, setIsOpen, onUnderstood }) => {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -47,7 +47,10 @@ const Modal: React.FC<ModalProps> = ({ title, message, isOpen, setIsOpen }) => {
                   Nah, go back
                 </button>
                 <button
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => {
+                    setIsOpen(false);
+                    onUnderstood();
+                  }}
                   className="bg-white hover:opacity-90 transition-opacity text-indigo-600 font-semibold w-full py-2 rounded"
                 >
                   Understood!

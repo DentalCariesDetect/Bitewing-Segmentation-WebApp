@@ -18,6 +18,7 @@ import {
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import Modal from "./Modal";
+import router from 'next/router';
 
 export function SideBar() {
     const [open, setOpen] = React.useState(0);
@@ -160,6 +161,7 @@ export function SideBar() {
                     setIsOpen={setOpenLogout}
                     title="Log Out"
                     message="Are you sure you want to log out?"
+                    onUnderstood={() => router.push('/login')}
                 />
 
             </List>

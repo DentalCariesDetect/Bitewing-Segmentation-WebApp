@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import Image from "next/image";
 import ImageTable from "./ImageTable";
 import Loading from "./Loading";
+import Modal from "./Modal";
 
 const UploadFile = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [listCropImg, setListCropImg] = useState<string[] | null>(null);
+  const [openModal, setOpenModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,7 +82,13 @@ const UploadFile = () => {
   return (
 
     <div className=" m-5 w-full sm:w-[800px] flex flex-col items-center justify-center p-6 bg-indigo-600 rounded-lg shadow-md mb-5 ">
-
+      <Modal
+        isOpen={openModal}
+        setIsOpen={setOpenModal}
+        title="Predict will use time"
+        message="Are you sure you want to predict?"
+        onUnderstood={() => handleUpload()}
+      />
       <input
         type="file"
         onChange={handleFileChange}
@@ -134,13 +142,17 @@ const UploadFile = () => {
       </div>
 
       <button
-        onClick={handleUpload}
+        onClick={() => {
+          setOpenModal(true)
+        }}
         className=" mt-5 px-6 py-2 text-black bg-white rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
       >
         START PREDICT
       </button>
 
     </div>
+
+
 
   );
 };
