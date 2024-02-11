@@ -11,7 +11,6 @@ export default function ProfileSetting() {
 
     return (
         <div className="w-full h-screen">
-            <Transition />
             <div className="bg-gradient-background h-full flex items-center justify-between">
                 <SideBar />
                 <div className=' flex flex-col space-y-5'>

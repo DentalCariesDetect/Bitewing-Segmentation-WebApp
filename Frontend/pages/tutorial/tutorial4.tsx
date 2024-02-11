@@ -24,7 +24,7 @@ export default function Home() {
 
       <div className="flex justify-between items-center flex-row space-y-3 h-screen m-16">
         <Link href="/tutorial/tutorial3" className="sm:invisible xl:visible">
-          <div className="rounded-full bg-white xl:w-24 xl:h-24 sm:invisible xl:visible flex justify-center items-center">
+          <div className="rounded-full bg-white xl:w-24 xl:h-24 sm:invisible xl:visible flex justify-center items-center text-black">
             Previous
           </div>
         </Link>
@@ -52,7 +52,7 @@ export default function Home() {
 
           <div className="flex justify-between p-8 w-11/12">
             <Link href="/tutorial/tutorial1" className="sm:visible xl:invisible">
-              <div className="rounded-full bg-white sm:visible xl:invisible flex justify-center items-center sm:h-[100px] sm:w-[140px]">
+              <div className="rounded-full bg-white sm:visible xl:invisible flex justify-center items-center sm:h-[100px] sm:w-[140px] text-black">
                 Previous
               </div>
             </Link>
@@ -67,7 +67,7 @@ export default function Home() {
         </div>
 
         <Link href="/predict/" className="sm:invisible xl:visible">
-          <div className="rounded-full bg-white xl:w-24 xl:h-24 sm:invisible xl:visible flex justify-center items-center">
+          <div className="rounded-full bg-white xl:w-24 xl:h-24 sm:invisible xl:visible flex justify-center items-center text-black">
             Get Start
           </div>
         </Link>

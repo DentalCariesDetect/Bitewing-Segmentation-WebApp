@@ -9,6 +9,8 @@ const UploadFile = () => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [listCropImg, setListCropImg] = useState<string[] | null>(null);
   const [openModal, setOpenModal] = useState(false);
+  const [falseModal, setFalseModal] = useState(false);
+  const [modelFail, setModelFail] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,11 +39,13 @@ const UploadFile = () => {
 
   const handleUpload = async () => {
 
-    setIsLoading(true);
     if (!selectedFile) {
-      alert("No file selected!");
+      setIsLoading(false);
+      setFalseModal(true);
       return;
     }
+
+    setIsLoading(true);
 
     const formData = new FormData();
     formData.append("file", selectedFile);
@@ -71,8 +75,8 @@ const UploadFile = () => {
       }
 
     } catch (error) {
-      console.error("Error during file upload:", error);
-      alert("There was an error uploading the file.");
+      setIsLoading(false);
+      setModelFail(true);
     } finally {
       setIsLoading(false);
 
@@ -88,6 +92,25 @@ const UploadFile = () => {
         title="Predict will use time"
         message="Are you sure you want to predict?"
         onUnderstood={() => handleUpload()}
+        status={"info"}
+      />
+
+      <Modal
+        isOpen={falseModal}
+        setIsOpen={setFalseModal}
+        title="Fail to predict"
+        message="Make sure you have selected a file."
+        onUnderstood={() => setFalseModal(false)}
+        status={"fail"}
+      />
+
+      <Modal
+        isOpen={modelFail}
+        setIsOpen={setModelFail}
+        title="Fail to predict"
+        message="Can not connect to server. Please try again."
+        onUnderstood={() => setModelFail(false)}
+        status={"fail"}
       />
       <input
         type="file"

@@ -14,7 +14,7 @@ import NavbarDesktop from '@/components/NavbarDesktop';
 export default function Home() {
   return (
     // Full screen background
-    <div className="h-full bg-gradient-background ">
+    <div className="h-full w-full bg-gradient-background ">
       <Transition />
       {/* Navbar  */}
       <div className="block md:hidden">

@@ -155,13 +155,13 @@ export function SideBar() {
                     </ListItem>
                 </button>
 
-                {/* if openLogout is true show modal component */}
                 <Modal
                     isOpen={openLogout}
                     setIsOpen={setOpenLogout}
                     title="Log Out"
                     message="Are you sure you want to log out?"
                     onUnderstood={() => router.push('/login')}
+                    status={"success"}
                 />
 
             </List>
