@@ -1,6 +1,7 @@
 package repositories
 
 import (
+	auth_error "segmentation/auth/entities"
 	"segmentation/dentists/entities"
 
 	"github.com/labstack/gommon/log"
@@ -14,6 +15,20 @@ type dentistPosgresRepository struct {
 
 func NewDentistPostgresRepository(db *gorm.DB) DentistRepository {
 	return &dentistPosgresRepository{db: db}
+}
+
+func (r *dentistPosgresRepository) SearchUsername(username *string) (bool, error) {
+	dentist := new(entities.Dentist)
+	result := r.db.Where("username = ?", username).Where("status <> ?", "Removed").Limit(1).Find(dentist)
+	if result.RowsAffected > 0 {
+		return true, nil
+	} else {
+		if result.Error != nil {
+			return false, &auth_error.ServerInternalError{Err: result.Error}
+		} else {
+			return false, nil
+		}
+	}
 }
 
 func (r *dentistPosgresRepository) InsertDentistData(in *entities.InsertDentist) error {
