@@ -1,19 +1,25 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import ImageTable from "./ImageTable";
+import Loading from "./Loading";
+import Modal from "./Modal";
 
 const UploadFile = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [listCropImg, setListCropImg] = useState<string[] | null>(null);
+  const [openModal, setOpenModal] = useState(false);
+  const [falseModal, setFalseModal] = useState(false);
+  const [modelFail, setModelFail] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files ? event.target.files[0] : null;
     setSelectedFile(file);
 
     if (file) {
-      const fileType = file.type;
-      // Immediately convert the file to a URL and set it for preview
+      // Immediately convert the file to a URL and set it for preview   const fileType = file.type;
+
       const url = URL.createObjectURL(file);
       setPreviewUrl(url);
     } else {
@@ -21,16 +27,31 @@ const UploadFile = () => {
     }
   };
 
+
+  if (isLoading) {
+    return (
+      <div className="w-full h-screen">
+        <Loading isOpen={true} />
+      </div>
+    )
+  }
+
+
   const handleUpload = async () => {
+
     if (!selectedFile) {
-      alert("No file selected!");
+      setIsLoading(false);
+      setFalseModal(true);
       return;
     }
+
+    setIsLoading(true);
 
     const formData = new FormData();
     formData.append("file", selectedFile);
 
     try {
+
       const response = await fetch("http://127.0.0.1:8000/api/crop", {
         method: "POST",
         body: formData,
@@ -54,15 +75,43 @@ const UploadFile = () => {
       }
 
     } catch (error) {
-      console.error("Error during file upload:", error);
-      alert("There was an error uploading the file.");
-    }
+      setIsLoading(false);
+      setModelFail(true);
+    } finally {
+      setIsLoading(false);
 
+    }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-6 bg-indigo-600 rounded-lg shadow-md mb-5">
 
+    <div className=" m-5 w-full sm:w-[800px] flex flex-col items-center justify-center p-6 bg-indigo-600 rounded-lg shadow-md mb-5 ">
+      <Modal
+        isOpen={openModal}
+        setIsOpen={setOpenModal}
+        title="Predict will use time"
+        message="Are you sure you want to predict?"
+        onUnderstood={() => handleUpload()}
+        status={"info"}
+      />
+
+      <Modal
+        isOpen={falseModal}
+        setIsOpen={setFalseModal}
+        title="Fail to predict"
+        message="Make sure you have selected a file."
+        onUnderstood={() => setFalseModal(false)}
+        status={"fail"}
+      />
+
+      <Modal
+        isOpen={modelFail}
+        setIsOpen={setModelFail}
+        title="Fail to predict"
+        message="Can not connect to server. Please try again."
+        onUnderstood={() => setModelFail(false)}
+        status={"fail"}
+      />
       <input
         type="file"
         onChange={handleFileChange}
@@ -116,7 +165,9 @@ const UploadFile = () => {
       </div>
 
       <button
-        onClick={handleUpload}
+        onClick={() => {
+          setOpenModal(true)
+        }}
         className=" mt-5 px-6 py-2 text-black bg-white rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
       >
         START PREDICT
@@ -124,7 +175,10 @@ const UploadFile = () => {
 
     </div>
 
+
+
   );
 };
+
 
 export default UploadFile;

@@ -1,4 +1,5 @@
-import Navbar from "@/components/Navbar";
+import NavbarDesktop from "@/components/NavbarDesktop";
+import NavbarMobile from "@/components/NavbarMobile";
 import Transition from "@/components/Transitions";
 import { Inter } from "next/font/google";
 import Link from "next/link";
@@ -12,7 +13,12 @@ export default function Home() {
       <Transition />
 
       <div className="sticky top-0">
-        <Navbar />
+        <div className="block md:hidden">
+          <NavbarMobile />
+        </div>
+        <div className="hidden md:block">
+          <NavbarDesktop />
+        </div>
       </div>
 
       <div className="flex justify-between items-center flex-row space-y-3 h-screen lg:m-16 sm:m-8">
@@ -41,13 +47,13 @@ export default function Home() {
 
           <div className="flex justify-between p-8 w-11/12 mt-1">
             <Link href="/tutorial/tutorial1" className="invisible">
-              <div className="rounded-full bg-white invisible flex justify-center items-center sm:h-[66px] sm:w-[82px]">
+              <div className="rounded-full bg-white invisible flex justify-center items-center sm:h-[66px] sm:w-[82px] text-black">
                 Next
               </div>
             </Link>
 
             <Link href="/tutorial/tutorial2" className="sm:visible xl:invisible">
-              <div className="rounded-full bg-white sm:visible xl:invisible flex justify-center items-center sm:h-[100px] sm:w-[140px]">
+              <div className="rounded-full bg-white sm:visible xl:invisible flex justify-center items-center sm:h-[100px] sm:w-[140px] text-black">
                 Next
               </div>
             </Link>
@@ -57,7 +63,7 @@ export default function Home() {
         </div>
 
         <Link href="/tutorial/tutorial3" className="sm:invisible xl:visible">
-          <div className="rounded-full bg-white xl:w-24 xl:h-24 sm:invisible xl:visible flex justify-center items-center">
+          <div className="rounded-full bg-white xl:w-24 xl:h-24 sm:invisible xl:visible flex justify-center items-center text-black">
             Next
           </div>
         </Link>

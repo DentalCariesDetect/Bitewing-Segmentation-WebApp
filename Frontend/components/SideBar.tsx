@@ -17,10 +17,14 @@ import {
     CubeTransparentIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import Modal from "./Modal";
+import router from 'next/router';
 
 export function SideBar() {
     const [open, setOpen] = React.useState(0);
     const [openAlert, setOpenAlert] = React.useState(true);
+    // logout popup state
+    const [openLogout, setOpenLogout] = React.useState(false);
 
     const handleOpen = (value: any) => {
         setOpen(open === value ? 0 : value);
@@ -114,7 +118,7 @@ export function SideBar() {
                 </Accordion> */}
                 {/* <hr className="my-2 border-blue-gray-50" /> */}
                 {/* Home */}
-                <Link href="../main">
+                <Link href="../dashboard">
                     <ListItem className="text-gray-100 bg-blue-900">
                         <ListItemPrefix className=" mr-2">
                             <HomeIcon className="h-5 w-5" />
@@ -142,14 +146,24 @@ export function SideBar() {
                     </ListItem>
                 </Link>
 
-                <Link href="../">
+                <button onClick={() => setOpenLogout(true)}>
                     <ListItem className="text-gray-100 bg-blue-900 ">
                         <ListItemPrefix className=" mr-2">
                             <PowerIcon className="h-5 w-5" />
                         </ListItemPrefix>
                         Log Out
                     </ListItem>
-                </Link>
+                </button>
+
+                <Modal
+                    isOpen={openLogout}
+                    setIsOpen={setOpenLogout}
+                    title="Log Out"
+                    message="Are you sure you want to log out?"
+                    onUnderstood={() => router.push('/login')}
+                    status={"success"}
+                />
+
             </List>
             {/* <Alert open={openAlert} className="mt-auto bg-white text-black" onClose={() => setOpenAlert(false)}>
                 <CubeTransparentIcon className="mb-4 h-12 w-12" />

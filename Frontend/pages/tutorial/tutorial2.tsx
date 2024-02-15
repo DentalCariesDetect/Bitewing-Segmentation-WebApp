@@ -1,4 +1,6 @@
-import Navbar from "@/components/Navbar";
+import NavbarDesktop from "@/components/NavbarDesktop";
+import NavbarMobile from "@/components/NavbarMobile";
+import Navbar from "@/components/NavbarMobile";
 import Transition from "@/components/fastTransition";
 import { Inter } from "next/font/google";
 import Link from "next/link";
@@ -11,14 +13,19 @@ export default function Home() {
 
     <div className="flex flex-col h-screen w-screen bg-gradient-background">
       {/* <Transition /> */}
-      <div>
-        <Navbar />
+      <div className="sticky top-0">
+        <div className="block md:hidden">
+          <NavbarMobile />
+        </div>
+        <div className="hidden md:block">
+          <NavbarDesktop />
+        </div>
       </div>
 
       <div className="flex justify-between items-center flex-row space-y-3 h-screen m-16">
 
         <Link href="/tutorial/tutorial1" className="sm:invisible xl:visible">
-          <div className="rounded-full bg-white xl:w-24 xl:h-24 sm:invisible xl:visible flex justify-center items-center">
+          <div className="rounded-full bg-white xl:w-24 xl:h-24 sm:invisible xl:visible flex justify-center items-center text-black">
             Previous
           </div>
         </Link>
@@ -52,13 +59,13 @@ export default function Home() {
 
           <div className="flex justify-between p-8 w-11/12">
             <Link href="/tutorial/tutorial1" className="sm:visible xl:invisible">
-              <div className="rounded-full bg-white sm:visible xl:invisible flex justify-center items-center sm:h-[100px] sm:w-[140px]">
+              <div className="rounded-full bg-white sm:visible xl:invisible flex justify-center items-center sm:h-[100px] sm:w-[140px] text-black">
                 Previous
               </div>
             </Link>
 
             <Link href="/tutorial/tutorial3" className="sm:visible xl:invisible">
-              <div className="rounded-full bg-white sm:visible xl:invisible flex justify-center items-center sm:h-[100px] sm:w-[140px]">
+              <div className="rounded-full bg-white sm:visible xl:invisible flex justify-center items-center sm:h-[100px] sm:w-[140px] text-black">
                 Next
               </div>
             </Link>
@@ -67,7 +74,7 @@ export default function Home() {
         </div>
 
         <Link href="/tutorial/tutorial3" className="sm:invisible xl:visible">
-          <div className="rounded-full bg-white xl:w-24 xl:h-24 sm:invisible xl:visible flex justify-center items-center">
+          <div className="rounded-full bg-white xl:w-24 xl:h-24 sm:invisible xl:visible flex justify-center items-center text-black">
             Next
           </div>
         </Link>

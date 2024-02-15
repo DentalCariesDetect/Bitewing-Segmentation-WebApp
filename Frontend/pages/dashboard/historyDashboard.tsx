@@ -97,42 +97,10 @@ export default function historyDashboard() {
                         </div>
                     </div>
 
-
-
                     <CardHeader floated={false} shadow={false} className="rounded-none">
-                        {/* <div className="mb-8 flex items-center justify-between gap-8">
-                            <div>
-                                <Typography variant="h5" color="blue-gray">
-                                    Patient list
-                                </Typography>
-                                <Typography color="gray" className="mt-1 font-normal">
-                                    See information about all members
-                                </Typography>
-                            </div>
-                            <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
-                                <Button variant="outlined" size="sm">
-                                    view all
-                                </Button>
-                                <Button className="flex items-center gap-3" size="sm">
-                                    <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Add member
-                                </Button>
-                            </div>
-                        </div> */}
+
                         <div className="flex flex-col items-center justify-between gap-4 md:flex-row bg-blue-900">
-                            {/* <Tabs value="all" className="w-full md:w-max text-black">
-                                <TabsHeader className="bg-black text-white">
-                                    {TABS.map(({ label, value }) => (
-                                        <Tab key={value} value={value}>
-                                            &nbsp;&nbsp;{label}&nbsp;&nbsp;
-                                        </Tab>
-                                    ))}
-                                </TabsHeader>
-                            </Tabs> */}
-                            {/* <div className="w-full md:w-72">
-                                <Input
-                                    label="Search"
-                                    icon={<MagnifyingGlassIcon className="h-5 w-5" />} crossOrigin={undefined} />
-                            </div> */}
+
                         </div>
                     </CardHeader>
                     <CardBody className="overflow-scroll px-0">
