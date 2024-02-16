@@ -11,3 +11,5 @@ database:
   sslmode: disable
   timezone: Asia/Bangkok
 
+variables:
+  jwt_secret: miraclex77

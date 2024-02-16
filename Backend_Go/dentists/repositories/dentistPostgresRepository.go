@@ -17,9 +17,9 @@ func NewDentistPostgresRepository(db *gorm.DB) DentistRepository {
 	return &dentistPosgresRepository{db: db}
 }
 
-func (r *dentistPosgresRepository) SearchUsername(username *string) (bool, error) {
+func (r *dentistPosgresRepository) Search(key string, value *string) (bool, error) {
 	dentist := new(entities.Dentist)
-	result := r.db.Where("username = ?", username).Where("status <> ?", "Removed").Limit(1).Find(dentist)
+	result := r.db.Where(key+"= ?", *value).Where("status <> ?", "Removed").Limit(1).Find(dentist)
 	if result.RowsAffected > 0 {
 		return true, nil
 	} else {
@@ -29,6 +29,15 @@ func (r *dentistPosgresRepository) SearchUsername(username *string) (bool, error
 			return false, nil
 		}
 	}
+}
+
+func (r *dentistPosgresRepository) GetDentistDataByKey(key string, value *string) (*entities.Dentist, error) {
+	dentist := new(entities.Dentist)
+	dentist_data := r.db.Where(key+"= ?", *value).Where("status <> ?", "Removed").First(dentist)
+	if dentist_data.Error != nil {
+		return nil, &auth_error.ServerInternalError{Err: dentist_data.Error}
+	}
+	return dentist, nil
 }
 
 func (r *dentistPosgresRepository) InsertDentistData(in *entities.InsertDentist) error {

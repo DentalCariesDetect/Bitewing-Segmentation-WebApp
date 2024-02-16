@@ -44,7 +44,7 @@ func (s *echoServer) initializeAuthHttpHandler() {
 
 	authRouters := s.app.Group("v1/auth")
 	authRouters.POST("/register", authHttpHandler.Register)
-	authRouters.POST("/login", authHttpHandler.Register)
+	authRouters.POST("/login", authHttpHandler.Login)
 }
 
 type CustomValidator struct {

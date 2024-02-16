@@ -25,6 +25,10 @@ type (
 		SSLMode  string
 		TimeZone string
 	}
+
+	Jwt struct {
+		SecretKey string
+	}
 )
 
 func GetConfig() Config {
@@ -50,5 +54,20 @@ func GetConfig() Config {
 			SSLMode:  viper.GetString("database.sslmode"),
 			TimeZone: viper.GetString("database.timezone"),
 		},
+	}
+}
+
+func GetJwtConfig() Jwt {
+	viper.SetConfigName("config")
+	viper.SetConfigType("yaml")
+	viper.AddConfigPath("./")
+
+	err := viper.ReadInConfig()
+	if err != nil {
+		panic(fmt.Errorf("fatal error config file: %v", err))
+	}
+
+	return Jwt{
+		SecretKey: viper.GetString("variables.jwt_secret"),
 	}
 }
