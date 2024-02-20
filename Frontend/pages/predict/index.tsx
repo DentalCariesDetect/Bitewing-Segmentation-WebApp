@@ -4,7 +4,6 @@ import Transition from "@/components/Transitions";
 import NavbarMobile from "@/components/NavbarMobile";
 import NavbarDesktop from "@/components/NavbarDesktop";
 
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Predict() {
   return (
