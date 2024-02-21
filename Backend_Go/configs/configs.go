@@ -1,9 +1,8 @@
 package configs
 
 import (
-	"fmt"
-
-	"github.com/spf13/viper"
+	"os"
+	"strconv"
 )
 
 type (
@@ -31,43 +30,54 @@ type (
 	}
 )
 
+// func init() {
+// 	viper.SetConfigFile(".env")
+// 	viper.SetConfigType("env") // If your .env file has KEY=VALUE format
+// 	err := viper.ReadInConfig()
+// 	if err != nil {
+// 		log.Fatalf("Error reading .env file, %s", err)
+// 	}
+// 	viper.AutomaticEnv()
+// }
+
 func GetConfig() Config {
-	viper.SetConfigName("config")
-	viper.SetConfigType("yaml")
-	viper.AddConfigPath("./")
-
-	err := viper.ReadInConfig()
-	if err != nil {
-		panic(fmt.Errorf("fatal error config file: %v", err))
-	}
-
+	echo_port, _ := strconv.Atoi(os.Getenv("ECHO_PORT"))
+	postgres_port, _ := strconv.Atoi(os.Getenv("POSTGRES_PORT"))
 	return Config{
 		App: App{
-			Port: viper.GetInt("app.server.port"),
+			Port: echo_port,
 		},
 		Db: Db{
-			Host:     viper.GetString("database.host"),
-			Port:     viper.GetInt("database.port"),
-			User:     viper.GetString("database.user"),
-			Password: viper.GetString("database.password"),
-			DBName:   viper.GetString("database.dbname"),
-			SSLMode:  viper.GetString("database.sslmode"),
-			TimeZone: viper.GetString("database.timezone"),
+			Host:     os.Getenv("POSTGRES_HOST"),
+			Port:     postgres_port,
+			User:     os.Getenv("POSTGRES_USER"),
+			Password: os.Getenv("POSTGRES_PASSWORD"),
+			DBName:   os.Getenv("POSTGRES_DB"),
+			SSLMode:  os.Getenv("POSTGRES_SSL_MODE"),
+			TimeZone: os.Getenv("POSTGRES_TIMEZONE"),
 		},
 	}
+	// return Config{
+	// 	App: App{
+	// 		Port: viper.GetInt("ECHO_PORT"),
+	// 	},
+	// 	Db: Db{
+	// 		Host:     viper.GetString("POSTGRES_HOST"),
+	// 		Port:     viper.GetInt("POSTGRES_PORT"),
+	// 		User:     viper.GetString("POSTGRES_USER"),
+	// 		Password: viper.GetString("POSTGRES_PASSWORD"),
+	// 		DBName:   viper.GetString("POSTGRES_DB"),
+	// 		SSLMode:  viper.GetString("POSTGRES_SSL_MODE"),
+	// 		TimeZone: viper.GetString("POSTGRES_TIMEZONE"),
+	// 	},
+	// }
 }
 
 func GetJwtConfig() Jwt {
-	viper.SetConfigName("config")
-	viper.SetConfigType("yaml")
-	viper.AddConfigPath("./")
-
-	err := viper.ReadInConfig()
-	if err != nil {
-		panic(fmt.Errorf("fatal error config file: %v", err))
-	}
-
 	return Jwt{
-		SecretKey: viper.GetString("variables.jwt_secret"),
+		SecretKey: os.Getenv("JWT_SECRET"),
 	}
+	// return Jwt{
+	// 	SecretKey: viper.GetString("JWT_SECRET"),
+	// }
 }
