@@ -49,6 +49,22 @@ const UploadFile = () => {
     }
   };
 
+  const downloadCroppedImage = () => {
+    if (previewUrl) {
+      const link = document.createElement('a');
+      link.href = previewUrl;
+      // You can set a default file name for the download
+      link.download = 'cropped-image.jpeg';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+    //  If there is no preview URL, show popup
+    else {
+      alert("No image to download!");
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center p-6 bg-white rounded-lg shadow-md">
       <input
@@ -98,6 +114,14 @@ const UploadFile = () => {
       >
         Upload File
       </button>
+
+      <button
+        onClick={downloadCroppedImage}
+        className="mt-5 px-6 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+      >
+        DOWNLOAD CROPPED IMAGE
+      </button>
+
     </div>
   );
 };
