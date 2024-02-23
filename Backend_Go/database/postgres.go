@@ -28,8 +28,6 @@ func NewPostgresDatabase(cfg *configs.Config) Database {
 	if err != nil {
 		panic("failed to connect database")
 	}
-	fmt.Print("sus")
-
 	return &postgresDatabase{Db: db}
 }
 

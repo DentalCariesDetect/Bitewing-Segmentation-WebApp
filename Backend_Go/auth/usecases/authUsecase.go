@@ -53,7 +53,6 @@ func (u *authUsecaseImpl) RegisterDataProcessing(in *models.RegisterData) error 
 		LastName:  in.LastName,
 		Username:  in.Username,
 		Password:  string(hashedPassword),
-		CreateOn:  time.Now(),
 		Status:    "Active",
 	}
 
@@ -87,7 +86,7 @@ func (u *authUsecaseImpl) LoginDataProcession(in *models.LoginData) (*string, er
 		} else {
 			//return success
 			//generate token
-			token, err := generateToken(&dentist.DentistId, &dentist.Username)
+			token, err := generateToken(&dentist.ID, &dentist.Username)
 			if err != nil {
 				return nil, &auth_error.ServerInternalError{Err: err}
 			}
@@ -97,7 +96,7 @@ func (u *authUsecaseImpl) LoginDataProcession(in *models.LoginData) (*string, er
 
 }
 
-func generateToken(id *uint32, username *string) (*string, error) {
+func generateToken(id *uint, username *string) (*string, error) {
 
 	// Load the jwt config
 	config := configs.GetJwtConfig()

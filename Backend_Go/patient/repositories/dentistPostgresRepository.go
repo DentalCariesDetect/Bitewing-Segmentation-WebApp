@@ -46,6 +46,7 @@ func (r *dentistPosgresRepository) InsertDentistData(in *entities.InsertDentist)
 		LastName:  in.LastName,
 		Username:  in.Username,
 		Password:  in.Password,
+		CreateOn:  in.CreateOn,
 		Status:    in.Status,
 	}
 

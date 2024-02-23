@@ -14,6 +14,8 @@ if [ -z "$RESULT" ]; then
 else
     echo "Database exists, skipping creation..."
     ./dentistMigrate
+    ./patientMigrate
+    ./segmentationMigrate
     echo "Database migration complete!"
 fi
 exec "$@"
