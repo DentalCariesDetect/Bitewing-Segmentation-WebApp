@@ -5,6 +5,8 @@ services:
     build: ./Frontend
     environment:
       - NODE_ENV=${NODE_ENV}
+    volumes:
+      - ./img:/app/public/img
     ports:
       - 3000:3000
     restart: always
@@ -42,6 +44,8 @@ services:
       - POSTGRES_PORT=${POSTGRES_PORT}
       - POSTGRES_HOST=${POSTGRES_HOST}
       - JWT_SECRET=${JWT_SECRET}
+    volumes:
+      - ./img:/app/img
     ports:
       - 8000:80
     depends_on:
@@ -62,6 +66,8 @@ services:
       - POSTGRES_TIMEZONE=${POSTGRES_TIMEZONE}
       - ECHO_PORT=${ECHO_PORT}
       - JWT_SECRET=${JWT_SECRET}
+    volumes:
+      - ./img:/root/img
     ports:
       - ${ECHO_PORT}:${ECHO_PORT}
     depends_on:

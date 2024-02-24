@@ -30,6 +30,7 @@ COPY --from=builder /app/main .
 COPY --from=builder /app/dentistMigrate .
 COPY --from=builder /app/patientMigrate .
 COPY --from=builder /app/segmentationMigrate .
+COPY --from=builder /app/img .
 
 COPY --from=builder /app/entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
