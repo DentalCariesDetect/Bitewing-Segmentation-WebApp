@@ -1,35 +1,33 @@
 package entities
 
 import (
-	"time"
-
 	"gorm.io/gorm"
 )
 
 type (
 	Dentist struct {
 		gorm.Model
-		FirstName    string     `json:"first_name"`
-		LastName     string     `json:"last_name"`
-		Username     string     `json:"username"`
-		Password     string     `json:"password"`
-		Gender       *string    `json:"gender"`
-		StartDate    *time.Time `json:"start_date"`
-		YearExp      *uint32    `json:"year_ext"`
-		HospitalName *string    `json:"hospital_name"`
-		Phone        *string    `json:"phone"`
-		Status       string     `json:"status"`
+		FirstName    string  `json:"first_name"`
+		LastName     string  `json:"last_name"`
+		Username     string  `json:"username"`
+		Password     string  `json:"password"`
+		Gender       *string `json:"gender"`
+		StartDate    *string `json:"start_date"`
+		YearExp      *uint32 `json:"year_ext"`
+		HospitalName *string `json:"hospital_name"`
+		Phone        *string `json:"phone"`
+		Status       string  `json:"status"`
 	}
 
 	UpdateDentist struct {
-		FirstName    string    `json:"first_name"`
-		LastName     string    `json:"last_name"`
-		Gender       string    `json:"gender"`
-		StartDate    time.Time `json:"start_date"`
-		YearExp      uint32    `json:"year_ext"`
-		HospitalName string    `json:"hospital_name"`
-		Phone        string    `json:"phone"`
-		Status       string    `json:"status"`
+		FirstName    string  `json:"first_name"`
+		LastName     string  `json:"last_name"`
+		Gender       *string `json:"gender"`
+		StartDate    *string `json:"start_date"`
+		YearExp      *uint32 `json:"year_ext"`
+		HospitalName *string `json:"hospital_name"`
+		Phone        *string `json:"phone"`
+		Status       string  `json:"status"`
 	}
 	InsertDentist struct {
 		FirstName string `json:"first_name"`

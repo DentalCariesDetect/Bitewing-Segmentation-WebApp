@@ -1,10 +1,11 @@
-package entities
+package errors
 
-type AuthErrorEntity struct {
+type AuthError struct {
 	ServerInternalError       error
 	UsernameNotFoundError     string
 	UsernameAlreadyExistError string
 	PasswordIncorrectError    string
+	TokenNotAuthorizedError   string
 }
 
 type UsernameNotFoundError struct{}
@@ -31,4 +32,10 @@ type ServerInternalError struct {
 
 func (e *ServerInternalError) Error() string {
 	return "server internal error: " + e.Err.Error()
+}
+
+type TokenNotAuthorizedError struct{}
+
+func (e *TokenNotAuthorizedError) Error() string {
+	return "token not authorized"
 }
