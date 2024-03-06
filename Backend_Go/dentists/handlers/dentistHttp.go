@@ -24,7 +24,7 @@ func (h *dentistHttpHandler) UpdateDentist(c echo.Context) error {
 	reqBody := new(models.UpdateModel)
 	if err := c.Bind(reqBody); err != nil {
 		log.Errorf("Error binding request body: %v", err)
-		return response(c, 400, "Bad request")
+		return response(c, 400, "Bad request", nil)
 	}
 	if err := c.Validate(reqBody); err != nil {
 		log.Errorf("Error validating request body: %v", err)
@@ -33,11 +33,19 @@ func (h *dentistHttpHandler) UpdateDentist(c echo.Context) error {
 	if err := h.dentistUsecase.CheckDentistID(&dentistId); err != nil {
 		log.Errorf("Error validating request body: %v", err)
 		if _, ok := err.(*dentistError.ServerInternalError); ok {
-			return response(c, 500, "Server Internal Error")
+			return response(c, 500, "Server Internal Error", nil)
 		} else {
-			return response(c, 400, err.Error())
+			return response(c, 400, err.Error(), nil)
 		}
 	}
 
-	return response(c, 200, "Success")
+	if err := h.dentistUsecase.UpdateDentist(reqBody, &dentistId); err != nil {
+		log.Errorf("Error updating dentist: %v", err)
+		if _, ok := err.(*dentistError.ServerInternalError); ok {
+			return response(c, 500, "Server Internal Error", nil)
+		} else {
+			return response(c, 400, err.Error(), nil)
+		}
+	}
+	return response(c, 200, "Success", nil)
 }

@@ -7,5 +7,5 @@ type UpdateModel struct {
 	Phone        string `json:"phone" validate:"omitempty,min=7,max=13"`
 	Gender       string `json:"gender" validate:"omitempty,gender"`
 	StartDate    string `json:"start_date"  `
-	YearExp      uint32 `json:"year_ext" validate:"omitempty,min=0"`
+	YearExp      uint64 `json:"year_ext" validate:"omitempty,min=0"`
 }

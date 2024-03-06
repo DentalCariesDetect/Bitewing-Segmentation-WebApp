@@ -13,18 +13,19 @@ type (
 		Password     string  `json:"password"`
 		Gender       *string `json:"gender"`
 		StartDate    *string `json:"start_date"`
-		YearExp      *uint32 `json:"year_ext"`
+		YearExp      *uint64 `json:"year_ext"`
 		HospitalName *string `json:"hospital_name"`
 		Phone        *string `json:"phone"`
 		Status       string  `json:"status"`
 	}
 
 	UpdateDentist struct {
+		gorm.Model
 		FirstName    string  `json:"first_name"`
 		LastName     string  `json:"last_name"`
 		Gender       *string `json:"gender"`
 		StartDate    *string `json:"start_date"`
-		YearExp      *uint32 `json:"year_ext"`
+		YearExp      *uint64 `json:"year_ext"`
 		HospitalName *string `json:"hospital_name"`
 		Phone        *string `json:"phone"`
 		Status       string  `json:"status"`

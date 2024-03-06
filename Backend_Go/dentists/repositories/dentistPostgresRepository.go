@@ -60,18 +60,17 @@ func (r *dentistPosgresRepository) InsertDentistData(in *entities.InsertDentist)
 	return nil
 }
 
-func (r *dentistPosgresRepository) UpdateDentistData(in *entities.UpdateDentist, id *uint32) error {
-	data := &entities.UpdateDentist{
-		FirstName:    in.FirstName,
-		LastName:     in.LastName,
-		Gender:       in.Gender,
-		StartDate:    in.StartDate,
-		YearExp:      in.YearExp,
-		HospitalName: in.HospitalName,
-		Phone:        in.Phone,
-		Status:       in.Status,
-	}
-	result := r.db.Model(&entities.Dentist{}).Where("id = ?", *id).Updates(data)
+func (r *dentistPosgresRepository) UpdateDentistData(in *entities.UpdateDentist, id *uint64) error {
+	result := r.db.Model(&entities.Dentist{}).Where("id = ?", *id).Updates(map[string]interface{}{
+		"first_name":    in.FirstName,
+		"last_name":     in.LastName,
+		"gender":        in.Gender,
+		"hospital_name": in.HospitalName,
+		"phone":         in.Phone,
+		"start_date":    in.StartDate,
+		"year_exp":      in.YearExp,
+		"status":        "Active",
+	})
 	if result.Error != nil {
 		log.Errorf("UpdateDentistData:%v", result.Error)
 		return result.Error
