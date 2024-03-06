@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"net/http"
-	auth_error "segmentation/auth/entities"
+	authError "segmentation/auth/errors"
 	"segmentation/auth/models"
 	"segmentation/auth/usecases"
 
@@ -32,7 +32,7 @@ func (h *authHttpHandler) Register(c echo.Context) error {
 	}
 	if err := h.authUsecase.CheckData(reqBody); err != nil {
 		log.Errorf("Error validating request body: %v", err)
-		if _, ok := err.(*auth_error.ServerInternalError); ok {
+		if _, ok := err.(*authError.ServerInternalError); ok {
 			return response(c, http.StatusInternalServerError, "Server Internal Error")
 		} else {
 			return response(c, http.StatusBadRequest, err.Error())
@@ -58,7 +58,7 @@ func (h *authHttpHandler) Login(c echo.Context) error {
 
 	if token, err := h.authUsecase.LoginDataProcession(reqBody); err != nil {
 		log.Errorf("Error validating request body: %v", err)
-		if _, ok := err.(*auth_error.ServerInternalError); ok {
+		if _, ok := err.(*authError.ServerInternalError); ok {
 			return response(c, http.StatusInternalServerError, "Server Internal Error")
 		} else {
 			return response(c, http.StatusBadRequest, err.Error())

@@ -2,14 +2,12 @@ package usecases
 
 import (
 	"errors"
-	auth_error "segmentation/auth/entities"
+	authError "segmentation/auth/errors"
 	"segmentation/auth/models"
 	"segmentation/configs"
 	"segmentation/dentists/entities"
 	"segmentation/dentists/repositories"
-	"time"
 
-	"github.com/dgrijalva/jwt-go"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -34,10 +32,10 @@ func (u *authUsecaseImpl) CheckData(in *models.RegisterData) error {
 	//result = false -> Not found username
 	//err != nill -> Found error
 	if result, err := u.dentistRepository.Search("username", username); result || err != nil {
-		return &auth_error.UsernameAlreadyExistError{}
+		return &authError.UsernameAlreadyExistError{}
 	} else {
-		if errors.Is(err, &auth_error.ServerInternalError{}) {
-			return &auth_error.ServerInternalError{Err: err}
+		if errors.Is(err, &authError.ServerInternalError{}) {
+			return &authError.ServerInternalError{Err: err}
 		}
 	}
 	return nil
@@ -46,19 +44,18 @@ func (u *authUsecaseImpl) CheckData(in *models.RegisterData) error {
 func (u *authUsecaseImpl) RegisterDataProcessing(in *models.RegisterData) error {
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(in.Password), bcrypt.DefaultCost)
 	if err != nil {
-		return &auth_error.ServerInternalError{Err: err}
+		return &authError.ServerInternalError{Err: err}
 	}
 	insertDentistData := &entities.InsertDentist{
 		FirstName: in.FirstName,
 		LastName:  in.LastName,
 		Username:  in.Username,
 		Password:  string(hashedPassword),
-		CreateOn:  time.Now(),
 		Status:    "Active",
 	}
 
 	if err := u.dentistRepository.InsertDentistData(insertDentistData); err != nil {
-		return &auth_error.ServerInternalError{Err: err}
+		return &authError.ServerInternalError{Err: err}
 	}
 
 	return nil
@@ -71,50 +68,27 @@ func (u *authUsecaseImpl) LoginDataProcession(in *models.LoginData) (*string, er
 	//result = false -> Not found username
 	//err != nill -> Found error
 	if result, err := u.dentistRepository.Search("username", username); !result || err != nil {
-		return nil, &auth_error.UsernameNotFoundError{}
-	} else {
-		if errors.Is(err, &auth_error.ServerInternalError{}) {
-			return nil, &auth_error.ServerInternalError{Err: err}
+		if err != nil {
+			return nil, &authError.ServerInternalError{Err: err}
 		}
+		return nil, &authError.UsernameNotFoundError{}
 	}
 	if dentist, err := u.dentistRepository.GetDentistDataByKey("username", username); err != nil {
 		//return error
-		return nil, &auth_error.ServerInternalError{Err: err}
+		return nil, &authError.ServerInternalError{Err: err}
 	} else {
 		//compare password
 		if err := bcrypt.CompareHashAndPassword([]byte(dentist.Password), []byte(*password)); err != nil {
-			return nil, &auth_error.PasswordIncorrectError{}
+			return nil, &authError.PasswordIncorrectError{}
 		} else {
 			//return success
 			//generate token
-			token, err := generateToken(&dentist.DentistId, &dentist.Username)
+			tokenUsecase := NewTokenUsecaseImpl(configs.GetJwtConfig().SecretKey)
+			token, err := tokenUsecase.GenerateToken(&dentist.ID, &dentist.Username)
 			if err != nil {
-				return nil, &auth_error.ServerInternalError{Err: err}
+				return nil, &authError.ServerInternalError{Err: err}
 			}
 			return token, nil
 		}
 	}
-
-}
-
-func generateToken(id *uint32, username *string) (*string, error) {
-
-	// Load the jwt config
-	config := configs.GetJwtConfig()
-	key := []byte(config.SecretKey)
-	// Create the token
-	token := jwt.New(jwt.SigningMethodHS256)
-
-	// Set some claims
-	clams := token.Claims.(jwt.MapClaims)
-	clams["authorized"] = true
-	clams["dentist_id"] = *id
-	clams["username"] = *username
-	clams["exp"] = time.Now().Add(time.Hour * 2).Unix()
-
-	tokenString, err := token.SignedString(key)
-	if err != nil {
-		return nil, err
-	}
-	return &tokenString, nil
 }

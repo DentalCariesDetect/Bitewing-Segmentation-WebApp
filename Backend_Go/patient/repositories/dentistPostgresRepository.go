@@ -1,8 +1,8 @@
 package repositories
 
 import (
+	auth_error "segmentation/auth/entities"
 	"segmentation/dentists/entities"
-	dentistError "segmentation/dentists/errors"
 
 	"github.com/labstack/gommon/log"
 
@@ -24,7 +24,7 @@ func (r *dentistPosgresRepository) Search(key string, value *string) (bool, erro
 		return true, nil
 	} else {
 		if result.Error != nil {
-			return false, &dentistError.ServerInternalError{Err: result.Error}
+			return false, &auth_error.ServerInternalError{Err: result.Error}
 		} else {
 			return false, nil
 		}
@@ -35,7 +35,7 @@ func (r *dentistPosgresRepository) GetDentistDataByKey(key string, value *string
 	dentist := new(entities.Dentist)
 	dentist_data := r.db.Where(key+"= ?", *value).Where("status <> ?", "Removed").First(dentist)
 	if dentist_data.Error != nil {
-		return nil, &dentistError.ServerInternalError{Err: dentist_data.Error}
+		return nil, &auth_error.ServerInternalError{Err: dentist_data.Error}
 	}
 	return dentist, nil
 }
@@ -46,6 +46,7 @@ func (r *dentistPosgresRepository) InsertDentistData(in *entities.InsertDentist)
 		LastName:  in.LastName,
 		Username:  in.Username,
 		Password:  in.Password,
+		CreateOn:  in.CreateOn,
 		Status:    in.Status,
 	}
 
@@ -57,25 +58,5 @@ func (r *dentistPosgresRepository) InsertDentistData(in *entities.InsertDentist)
 	}
 
 	log.Debugf("InsertCockroachData: %v", result.RowsAffected)
-	return nil
-}
-
-func (r *dentistPosgresRepository) UpdateDentistData(in *entities.UpdateDentist, id *uint32) error {
-	data := &entities.UpdateDentist{
-		FirstName:    in.FirstName,
-		LastName:     in.LastName,
-		Gender:       in.Gender,
-		StartDate:    in.StartDate,
-		YearExp:      in.YearExp,
-		HospitalName: in.HospitalName,
-		Phone:        in.Phone,
-		Status:       in.Status,
-	}
-	result := r.db.Model(&entities.Dentist{}).Where("id = ?", *id).Updates(data)
-	if result.Error != nil {
-		log.Errorf("UpdateDentistData:%v", result.Error)
-		return result.Error
-	}
-	log.Debugf("UpdateDentistData: %v", result.RowsAffected)
 	return nil
 }
