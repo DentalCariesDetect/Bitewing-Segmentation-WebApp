@@ -40,6 +40,15 @@ func (r *dentistPosgresRepository) GetDentistDataByKey(key string, value *string
 	return dentist, nil
 }
 
+func (r *dentistPosgresRepository) GetDentistDataAll() ([]*entities.Dentist, error) {
+	dentists := []*entities.Dentist{}
+	result := r.db.Where("status <> ?", "Removed").Find(&dentists)
+	if result.Error != nil {
+		return nil, &dentistError.ServerInternalError{Err: result.Error}
+	}
+	return dentists, nil
+}
+
 func (r *dentistPosgresRepository) InsertDentistData(in *entities.InsertDentist) error {
 	data := &entities.Dentist{
 		FirstName: in.FirstName,
@@ -76,5 +85,15 @@ func (r *dentistPosgresRepository) UpdateDentistData(in *entities.UpdateDentist,
 		return result.Error
 	}
 	log.Debugf("UpdateDentistData: %v", result.RowsAffected)
+	return nil
+}
+
+func (r *dentistPosgresRepository) DeleteDentistData(id *uint64) error {
+	result := r.db.Model(&entities.Dentist{}).Where("id = ?", *id).Where("status <> ?", "Removed").Update("status", "Removed")
+	if result.Error != nil {
+		log.Errorf("DeleteDentistData:%v", result.Error)
+		return result.Error
+	}
+	log.Debugf("DeleteDentistData: %v", result.RowsAffected)
 	return nil
 }
