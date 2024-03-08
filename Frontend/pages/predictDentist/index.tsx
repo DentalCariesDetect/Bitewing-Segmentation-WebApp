@@ -7,6 +7,7 @@ import NavbarDesktop from "@/components/NavbarDesktop";
 import { motion } from "framer-motion";
 import Image from 'next/image';
 import { fadeIn } from "@/variants";
+import Link from "next/link";
 
 
 export default function Predict() {
@@ -94,10 +95,15 @@ export default function Predict() {
                             </div>
 
                             {/* Submit Button */}
-                            <div className=" translate-y-5">
-                                <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                    Update Profile
+                            <div className=" translate-y-5 flex flex-rows space-x-5">
+                                <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-white hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    Decline
                                 </button>
+                                <Link href="../predictDentist/predictPatient">
+                                    <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        Accept
+                                    </button>
+                                </Link>
                             </div>
                         </form>
                     </motion.div>

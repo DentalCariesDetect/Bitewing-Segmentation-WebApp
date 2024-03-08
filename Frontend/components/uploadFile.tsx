@@ -38,21 +38,17 @@ const UploadFile = () => {
 
 
   const handleUpload = async () => {
-
     if (!selectedFile) {
-      setIsLoading(false);
       setFalseModal(true);
       return;
     }
 
     setIsLoading(true);
-
     const formData = new FormData();
     formData.append("file", selectedFile);
 
     try {
-
-      const response = await fetch("http://127.0.0.1:8000/api/crop", {
+      const response = await fetch("http://127.0.0.1:8000/api/segmentation/test_crop", {
         method: "POST",
         body: formData,
       });
@@ -62,26 +58,20 @@ const UploadFile = () => {
       }
 
       const responseData = await response.json();
-      if (responseData.crop_img) {
-        // Assuming `responseData.crop_img` is the base64 string of the cropped image
-        // Convert base64 string to an image and set it for preview
-        setPreviewUrl(`data:image/jpeg;base64,${responseData.crop_img}`);
-        // console.log(responseData.list_crop_img);
-        if (Array.isArray(responseData.list_crop_img)) {
-          const formattedList = responseData.list_crop_img.map((img: string) => `data:image/jpeg;base64,${img}`);
-          setListCropImg(formattedList);
-        }
-
+      setPreviewUrl(`data:image/jpeg;base64,${responseData.data.crop_img}`);
+      if (Array.isArray(responseData.data.list_crop_img)) {
+        const formattedList = responseData.data.list_crop_img.map((item: any) => `data:image/jpeg;base64,${item.base64_image}`);
+        setListCropImg(formattedList);
       }
 
     } catch (error) {
-      setIsLoading(false);
+      console.error(error);
       setModelFail(true);
     } finally {
       setIsLoading(false);
-
     }
   };
+
 
   const downloadCroppedImage = () => {
     if (previewUrl) {
@@ -101,7 +91,7 @@ const UploadFile = () => {
 
   return (
 
-    <div className=" m-5 w-full sm:w-[800px] flex flex-col items-center justify-center p-6 bg-indigo-600 rounded-lg shadow-md mb-5 ">
+    <div className=" m-5 w-full sm:w-[500px] flex flex-col items-center justify-center p-6 bg-indigo-600 rounded-lg shadow-md mb-5 ">
       <Modal
         isOpen={openModal}
         setIsOpen={setOpenModal}
@@ -174,9 +164,9 @@ const UploadFile = () => {
         </div>
       )}
       <div>
-        <ImageTable
+        {/* <ImageTable
           images={listCropImg ?? []}
-        />
+        /> */}
 
       </div>
 
@@ -188,12 +178,12 @@ const UploadFile = () => {
       >
         START PREDICT
       </button>
-      {/* <button
+      <button
         onClick={downloadCroppedImage}
         className="mt-5 px-6 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
       >
         DOWNLOAD CROPPED IMAGE
-      </button> */}
+      </button>
 
 
     </div>
