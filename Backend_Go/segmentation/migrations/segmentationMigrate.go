@@ -13,9 +13,6 @@ func main() {
 }
 
 func segmentationMigrate(db database.Database) {
-	db.GetDb().Migrator().CreateTable(&entities.Image{})
-	db.GetDb().Migrator().CreateTable(&entities.Bitewing{})
-	db.GetDb().Migrator().CreateTable(&entities.Result{})
-	db.GetDb().Migrator().CreateTable(&entities.Tooth{})
+	db.GetDb().AutoMigrate(&entities.Image{}, &entities.Bitewing{}, &entities.Result{}, &entities.Tooth{})
 
 }

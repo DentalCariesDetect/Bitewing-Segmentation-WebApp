@@ -3,14 +3,20 @@ package server
 import (
 	authHandler "segmentation/auth/handlers"
 	authUsecase "segmentation/auth/usecases"
+
 	dentistHandler "segmentation/dentists/handlers"
 	dentistRepository "segmentation/dentists/repositories"
 	dentistUsecase "segmentation/dentists/usecases"
+
+	patientHandler "segmentation/patient/handlers"
+	patientRepository "segmentation/patient/repositories"
+	patientUsecase "segmentation/patient/usecases"
 )
 
 func (s *echoServer) initializeRouters() {
 	s.initializeAuthHttpHandler()
 	s.initializeDentistHttpHandler()
+	s.initializePatientHttpHandler()
 }
 
 func (s *echoServer) initializeAuthHttpHandler() {
@@ -32,8 +38,27 @@ func (s *echoServer) initializeDentistHttpHandler() {
 	dentistRouters := s.app.Group("v1/dentist")
 
 	dentistRouters.Use(TokenAuthentication(dentistPosgresRepository))
-	dentistRouters.POST("/update/:id", dentistHttpHandler.UpdateDentist)
+	dentistRouters.PUT("/:id", dentistHttpHandler.UpdateDentist)
 	dentistRouters.GET("/:id", dentistHttpHandler.GetDentistById)
 	dentistRouters.GET("/", dentistHttpHandler.GetDentistAll)
 	dentistRouters.DELETE("/:id", dentistHttpHandler.DeleteDentist)
+}
+
+func (s *echoServer) initializePatientHttpHandler() {
+	patientPosgresRepository := patientRepository.NewPatientPostgresRepository(s.db)
+	patientUsecase := patientUsecase.NewPatientUsecaseImpl(patientPosgresRepository)
+	patientHttpHandler := patientHandler.NewPatientHttpHandler(patientUsecase)
+
+	patientRouters := s.app.Group("v1/patient")
+
+	patientRouters.Use(TokenAuthentication(dentistRepositoryForAuth(s)))
+	patientRouters.POST("/", patientHttpHandler.CreatePatient)
+	patientRouters.GET("/:id", patientHttpHandler.GetPatientById)
+	patientRouters.GET("/", patientHttpHandler.GetPatientsByDentist)
+	patientRouters.DELETE("/:id", patientHttpHandler.DeletePatient)
+	patientRouters.PUT("/:id", patientHttpHandler.UpdatePatient)
+}
+
+func dentistRepositoryForAuth(s *echoServer) dentistRepository.DentistRepository {
+	return dentistRepository.NewDentistPostgresRepository(s.db)
 }

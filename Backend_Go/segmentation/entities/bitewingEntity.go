@@ -7,7 +7,8 @@ import (
 type (
 	Bitewing struct {
 		gorm.Model
-		ImageId uint32 `json:"image_id" gorm:"foreignkey:Image"`
+		ImageId uint
+		Image   Image
 		Name    string `json:"name"`
 		Side    string `json:"side"`
 		Status  string `json:"status"`
