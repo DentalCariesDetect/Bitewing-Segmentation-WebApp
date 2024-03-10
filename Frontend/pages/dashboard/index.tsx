@@ -7,7 +7,6 @@ import Transition from "@/components/Transitions";
 
 export default function ProfileSetting() {
 
-    const [open, setOpen] = React.useState(false);
 
     return (
         <div className="w-full h-screen">
