@@ -13,8 +13,8 @@ if [ -z "$RESULT" ]; then
     echo "Database migration complete!"
 else
     echo "Database exists, skipping creation..."
-    ./dentistMigrate
     ./patientMigrate
+    ./dentistMigrate
     ./segmentationMigrate
     echo "Database migration complete!"
 fi
