@@ -48,44 +48,8 @@ const ImageTable: React.FC<ImageTableProps> = ({ images }) => {
                     ))}
                 </div>
                 <div className=" flex flex-col">
-                    {/* Dropdown example code */}
-                    <div className=" flex flex-row space-x-3">
-                        <h1 className=" text-center flex justify-center ">Carious Diagnosis</h1>
-                        <select
-                            className="rounded-md px-5 py-2 bg-inherit border mb-6 "
-                            required
-                        >
-                            <option value="ra1">RA1</option>
-                            <option value="ra2">RA2</option>
-                            <option value="ra3">RA3</option>
-                            <option value="rb4">RB4</option>
-                            <option value="rc5">RC5</option>
-                            <option value="rd6">RD6</option>
-                        </select>
-                    </div>
-                    {/* <Dropdown options={["RA1", "RA2", "RA3", "RB4", "RC5", "RD6"]} selectedOption="RA1" onOptionChange={(newOption) => console.log(newOption)} /> */}
-
-
                     {/* Description box */}
-                    <div className=" sm:w-[400px] w-full">
-                        <h1>Description</h1>
-                        {/* multiple line input4*/}
-                        <textarea
-                            className="rounded-md px-5 py-2 bg-inherit border mb-6 h-80 w-full"
-                            placeholder="Description"
-                            required
-                        />
-                    </div>
 
-                    <div className=" sm:w-[400px] w-full">
-                        <h1>Treatment approach</h1>
-                        {/* multiple line input */}
-                        <textarea
-                            className="rounded-md px-5 py-2 bg-inherit border mb-6 h-80 w-full"
-                            placeholder="Treatment approach"
-                            required
-                        />
-                    </div>
                 </div>
             </div>
         </div>
