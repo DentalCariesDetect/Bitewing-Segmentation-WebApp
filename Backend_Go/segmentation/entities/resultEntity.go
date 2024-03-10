@@ -16,8 +16,8 @@ type (
 		Dentist     dentist.Dentist
 		PatientId   uint64
 		Patient     patient.Patient
-		Description string `json:"description"`
-		Treatment   string `json:"treatment"`
-		Status      string `json:"status"`
+		Description *string `json:"description"`
+		Treatment   *string `json:"treatment"`
+		Status      string  `json:"status"`
 	}
 )

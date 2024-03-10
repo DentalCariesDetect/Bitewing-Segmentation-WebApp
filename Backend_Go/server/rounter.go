@@ -11,12 +11,17 @@ import (
 	patientHandler "segmentation/patient/handlers"
 	patientRepository "segmentation/patient/repositories"
 	patientUsecase "segmentation/patient/usecases"
+
+	SegmentationHandler "segmentation/segmentation/handlers"
+	SegmentationRepository "segmentation/segmentation/repositories"
+	SegmentationUsecase "segmentation/segmentation/usecases"
 )
 
 func (s *echoServer) initializeRouters() {
 	s.initializeAuthHttpHandler()
 	s.initializeDentistHttpHandler()
 	s.initializePatientHttpHandler()
+	s.initializeSegmentationHttpHandler()
 }
 
 func (s *echoServer) initializeAuthHttpHandler() {
@@ -57,6 +62,25 @@ func (s *echoServer) initializePatientHttpHandler() {
 	patientRouters.GET("/", patientHttpHandler.GetPatientsByDentist)
 	patientRouters.DELETE("/:id", patientHttpHandler.DeletePatient)
 	patientRouters.PUT("/:id", patientHttpHandler.UpdatePatient)
+}
+func (s *echoServer) initializeSegmentationHttpHandler() {
+	//imagePosgresRepository := SegmentationRepository.NewImagePostgresRepository(s.db)
+	resultPosgresRepository := SegmentationRepository.NewResultPostgresRepository(s.db)
+	bitewingPosgresRepository := SegmentationRepository.NewBitewingPostgresRepository(s.db)
+	toothPosgresRepository := SegmentationRepository.NewToothPostgresRepository(s.db)
+
+	resultUsecase := SegmentationUsecase.NewResultUsecaseImpl(
+		resultPosgresRepository,
+		bitewingPosgresRepository,
+		toothPosgresRepository)
+
+	segmentationHttpHandler := SegmentationHandler.NewSegmentationHttpHandler(resultUsecase)
+
+	segmentationRouters := s.app.Group("v1/segmentation")
+
+	segmentationRouters.Use(TokenAuthentication(dentistRepositoryForAuth(s)))
+	segmentationRouters.PUT("/saveResult/:id", segmentationHttpHandler.SaveSegmentation)
+
 }
 
 func dentistRepositoryForAuth(s *echoServer) dentistRepository.DentistRepository {
