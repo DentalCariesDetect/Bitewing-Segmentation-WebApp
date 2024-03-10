@@ -1,2 +1,4 @@
 /__pycache__/
 /env/
+# ignore best.pt
+best.pt
