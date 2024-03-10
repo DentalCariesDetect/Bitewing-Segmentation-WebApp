@@ -100,7 +100,7 @@ const PieChart = () => {
 
 export default function DashboardMain() {
     return (
-        <div className="w-full h-screen flex bg-violet-800">
+        <div className="w-full h-screen flex bg-gradient-background">
             {/* Sidebar */}
             <SideBar />
 

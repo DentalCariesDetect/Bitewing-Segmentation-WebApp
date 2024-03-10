@@ -16,15 +16,46 @@ import {
 import { motion } from 'framer-motion';
 import { fadeIn } from '@/variants';
 import Link from "next/link";
+import React, { useState } from 'react';
+import EditModal from '../../components/EditModal';
 
+interface UserDetails {
+    name: string;
+    email: string;
+    gender: string;
+    phonenumber: string;
+}
 
-export default function historyDashboard() {
+export default function HistoryDashboard() {
 
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [editedPatientIndex, setEditedPatientIndex] = useState<number>(-1);
+    const [currentUserDetails, setCurrentUserDetails] = useState<UserDetails>({
+        name: '',
+        email: '',
+        gender: '',
+        phonenumber: '',
+    });
+
+    const handleEditClick = (index: number, userDetails: any) => {
+        setCurrentUserDetails(userDetails); // Set current user details to edit
+        setIsEditModalOpen(true); // Open the modal
+        setEditedPatientIndex(index); // Set the index of the edited patient
+    };
+
+    const handleSaveEdit = (newDetails: UserDetails) => {
+        console.log("Updated Details:", newDetails); // Log the new details
+        // Implement state update logic
+        const updatedRows = [...TABLE_ROWS]; // Create a copy of the TABLE_ROWS array
+        updatedRows[editedPatientIndex] = { ...updatedRows[editedPatientIndex], ...newDetails }; // Update the patient's details
+        setTABLE_ROWS(updatedRows); // Update the state with the updated data
+        setIsEditModalOpen(false); // Close the modal after saving
+    };
 
 
     const TABLE_HEAD = ["Patient ID", "Gender", "Age", "Phone", "Edit", ""];
 
-    const TABLE_ROWS = [
+    const [TABLE_ROWS, setTABLE_ROWS] = useState<Array<any>>([
         {
             img: "https://scontent.fbkk5-4.fna.fbcdn.net/v/t1.6435-9/86263526_2565482020399840_7973518111129206784_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=be3454&_nc_eui2=AeGteQNRBY3cll7biRo3CVIUwibETxdg7HHCJsRPF2DscSeSXHvDnbQihINj0OpCu4I4Ix4DnCLZhnIUMyGjVcJS&_nc_ohc=1GrZLN6aR3QAX_HHZcX&_nc_oc=AQn9YHotEmC3qt623G6lYmhXn1FJmttafoJ81Cs--XDRZqUEwMizZ2_XlbYBogbP_Ss&_nc_ht=scontent.fbkk5-4.fna&oh=00_AfCBy42us10tXn4pYhGN9f4xHKZB9EtwnFQNEbrQ3OTeMA&oe=65E9A183",
             name: "John Michael",
@@ -70,8 +101,10 @@ export default function historyDashboard() {
             online: false,
             phonenumber: "0930000000",
         },
+    ]);
 
-    ];
+
+
 
     return (
         <div className="w-full h-screen">
@@ -81,6 +114,13 @@ export default function historyDashboard() {
                 className="bg-gradient-background h-full flex items-center justify-between ">
 
                 <SideBar />
+
+                <EditModal
+                    isOpen={isEditModalOpen}
+                    setIsOpen={setIsEditModalOpen}
+                    initialUserDetails={currentUserDetails} // Pass initial user details to the modal
+                    onSave={handleSaveEdit} // Pass onSave function to the modal
+                />
 
                 <motion.div
                     variants={fadeIn('right', 0.05)}
@@ -191,9 +231,10 @@ export default function historyDashboard() {
                                                 </td>
                                                 <td className={classes}>
                                                     <Tooltip content="Edit User">
-                                                        <IconButton variant="text">
-                                                            <PencilIcon className="h-4 w-4" />
+                                                        <IconButton variant="text" onClick={() => handleEditClick(index, { img, name, email, gender, phonenumber })}>
+                                                            <PencilIcon className="h-4 w-4  text-white" />
                                                         </IconButton>
+
                                                     </Tooltip>
                                                 </td>
                                             </tr>
@@ -207,7 +248,7 @@ export default function historyDashboard() {
                         <Typography variant="small" color="blue-gray" className="font-normal">
                             Page 1 of 10
                         </Typography>
-                        <div className="flex gap-2">
+                        <div className="flex gap-2 text-white">
                             <Button variant="outlined" size="sm">
                                 Previous
                             </Button>
@@ -222,3 +263,7 @@ export default function historyDashboard() {
         </div>
     );
 }
+function setEditedPatientIndex(index: number) {
+    throw new Error("Function not implemented.");
+}
+
