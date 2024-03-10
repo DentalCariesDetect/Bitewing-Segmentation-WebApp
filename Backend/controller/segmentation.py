@@ -10,18 +10,6 @@ from service.segmentation import SegmentationService
 from model.segmentation import SegmentationRequest
 from PIL import Image
 
-import base64
-from io import BytesIO
-from typing import List
-
-def image_to_base64(image_path: str) -> str:
-    """Convert an image to a base64 string."""
-    with Image.open(image_path) as image:
-        buffered = BytesIO()
-        image.save(buffered, format="JPEG")  # Adjust the format based on your image format
-        img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
-    return img_str
-
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 router = APIRouter(
@@ -56,33 +44,23 @@ async def cropping(file: UploadFile = File(...),patient_id:int=Form(...) ,token:
     return ResponseModel(data=result, message="Image has been cropped successfully")
 
 
-@router.post("/test_crop", response_model=ResponseModel, response_model_exclude_none=True)
+@router.post("/test_crop",response_model= ResponseModel,response_model_exclude_none=True)
 async def crop(file: UploadFile = File(...)):
     start_time = time.time()  # Start timing
 
-    # Save the uploaded image and get its path
     image = CroppingService.save_image(file)
+    save_time = time.time()
+    data_path = CroppingService.cropping(image)
+    crop_time = time.time()
 
-    # Process the image to get cropped parts and overview image
-    cropped_images_data, overview_image_path = CroppingService.cropping(image)
-
-    # Encode the overview image to base64
-    overview_image_base64 = image_to_base64(overview_image_path)
-
-    # Encode all cropped images to base64
-    cropped_images_base64 = [{
-        "position": data["position"],
-        "numbering": data["numbering"],
-        "base64_image": image_to_base64(data["image_path"])  # Encode each cropped image
-    } for data in cropped_images_data]
-
+    image_path = data_path[0]
+    image_path_crop = data_path[1]
     response = dict(
-        crop_img=overview_image_base64,  # Overview image as base64
-        list_crop_img=cropped_images_base64  # List of cropped images as base64
-    )
-
+        crop_img=image_path_crop,
+        list_crop_img=image_path
+    )   
     end_time = time.time()
-  
+    print(f"Save image time: {save_time - start_time} seconds")
+    print(f"Cropping time: {crop_time - save_time} seconds")
     print(f"Total time: {end_time - start_time} seconds")
-
     return ResponseModel(data=response, message="Image has been cropped successfully")

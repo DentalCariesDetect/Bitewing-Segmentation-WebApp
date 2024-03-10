@@ -85,16 +85,16 @@ export default function Home() {
           />
         </motion.div>
       </div>
-      <div className="grid-cols-10 flex justify-center ">
+      <div className="grid-cols-10 flex justify-center">
         <motion.div
           variants={fadeIn('up', 0.5)}
           initial="hidden"
           animate="show"
           exit="hidden"
-          className=" xl:flex-rows col-span-9  mr-20  justify-center space-x-28 md:grid md:grid-cols-2 xl:flex mb-14 mt-14"
+          className=" xl:flex-rows col-span-9  mr-20 mt-10 justify-center space-x-28 md:grid md:grid-cols-2 xl:flex "
         >
           {/* box1 */}
-          <div className="ml-28 h-[320px] w-[350px] rounded-3xl bg-white bg-opacity-70 shadow-lg shadow-white transform motion-safe:hover:scale-110 duration-500 mb-10 xl:ml-64 ">
+          <div className="ml-28   h-[280px] w-[350px] rounded-3xl bg-white bg-opacity-70 shadow-lg shadow-white transform motion-safe:hover:scale-110 duration-500 mb-10 xl:ml-64 ">
             <h1 className="mt-5 text-center text-2xl text-black opacity-100">
               Privacy-Centric
             </h1>
@@ -113,7 +113,7 @@ export default function Home() {
             </div>
           </div>
           {/* box2 */}
-          <div className="h-[320px] w-[350px] rounded-3xl bg-white bg-opacity-70 shadow-lg shadow-white transform motion-safe:hover:scale-110 duration-500  lg:mr-0 sm:mr-20 mb-10">
+          <div className="h-[280px] w-[350px] rounded-3xl bg-white bg-opacity-70 shadow-lg shadow-white transform motion-safe:hover:scale-110 duration-500  lg:mr-0 sm:mr-20 mb-10">
             <h1 className="mt-5 text-center text-2xl text-black">
               Easy Accessibility
             </h1>
@@ -132,7 +132,7 @@ export default function Home() {
             </div>
           </div>
           {/* box3 */}
-          <div className="h-[320px] w-[350px] rounded-3xl bg-white bg-opacity-70 shadow-lg shadow-white transform motion-safe:hover:scale-110 duration-500 mb-10">
+          <div className="h-[280px] w-[350px] rounded-3xl bg-white bg-opacity-70 shadow-lg shadow-white transform motion-safe:hover:scale-110 duration-500 mb-10">
             <h1 className="mt-5 text-center text-2xl text-black">
               Support for Dental
             </h1>
@@ -152,7 +152,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className=" hidden right-24 lg:flex items-end justify-end p-10  xl:-translate-x-20 ">
+          <div className=" hidden right-24 lg:flex items-end justify-end p-10  xl:-translate-x-20">
             <Image
               className=" "
               src="/image/tooth.png"

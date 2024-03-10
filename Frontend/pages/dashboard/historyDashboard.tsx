@@ -15,7 +15,6 @@ import {
 } from "@material-tailwind/react";
 import { motion } from 'framer-motion';
 import { fadeIn } from '@/variants';
-import Link from "next/link";
 
 
 export default function historyDashboard() {
@@ -93,9 +92,8 @@ export default function historyDashboard() {
                             <h1 className=" text-3xl mt-5 ml-5">Predict History</h1>
                         </div>
                         <div>
-                            <Link href="../predictDentist">
-                                <button className="bg-white text-black rounded-md p-2 mt-5 ml-5">Predict</button>
-                            </Link>
+                            {/* Predict button */}
+                            <button className="bg-white text-black rounded-md p-2 mt-5 ml-5">Predict</button>
                         </div>
                     </div>
 

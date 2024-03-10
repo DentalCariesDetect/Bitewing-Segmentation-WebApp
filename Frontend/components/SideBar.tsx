@@ -26,6 +26,10 @@ export function SideBar() {
     // logout popup state
     const [openLogout, setOpenLogout] = React.useState(false);
 
+    const handleOpen = (value: any) => {
+        setOpen(open === value ? 0 : value);
+    };
+
     return (
         <Card className="h-full w-full bg-violet-800 max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 rounded-l-none border-white">
             <div className="mb-2 p-4">

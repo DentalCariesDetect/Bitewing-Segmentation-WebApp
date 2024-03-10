@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { SideBar } from '@/components/SideBar';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { fadeIn } from '@/variants';
 import Transition from '@/components/Transitions';
 

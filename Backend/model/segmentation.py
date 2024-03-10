@@ -1,7 +1,6 @@
 from typing import Optional,TypeVar
 from fastapi import File, UploadFile
 from pydantic import BaseModel
-from typing import List, Tuple
 
 T = TypeVar('T')
 
@@ -16,7 +15,7 @@ class SegmentationRequest(BaseModel):
     dentist_id:int
     patient_id:int
     bitewing_path: str
-    list_crop_img: List[Tuple[str, str]]
+    list_crop_img: list[dict[str,str]]
 
 
 
