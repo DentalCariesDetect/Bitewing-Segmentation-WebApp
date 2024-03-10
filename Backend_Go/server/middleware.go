@@ -33,8 +33,6 @@ func TokenAuthentication(repo dentistRepository.DentistRepository) echo.Middlewa
 			if result, err := repo.Search("id", &dentistId); !result || err != nil {
 				return c.JSON(http.StatusUnauthorized, "invalid or expired token")
 			}
-			c.Set("dentistId", dentistId)
-
 			return next(c)
 		}
 	}

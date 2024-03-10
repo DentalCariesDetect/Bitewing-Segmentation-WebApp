@@ -62,7 +62,7 @@ func (r *dentistPosgresRepository) InsertDentistData(in *entities.InsertDentist)
 
 	if result.Error != nil {
 		log.Errorf("InsertDentistData:%v", result.Error)
-		return &dentistError.ServerInternalError{Err: result.Error}
+		return result.Error
 	}
 
 	log.Debugf("InsertCockroachData: %v", result.RowsAffected)
@@ -82,7 +82,7 @@ func (r *dentistPosgresRepository) UpdateDentistData(in *entities.UpdateDentist,
 	})
 	if result.Error != nil {
 		log.Errorf("UpdateDentistData:%v", result.Error)
-		return &dentistError.ServerInternalError{Err: result.Error}
+		return result.Error
 	}
 	log.Debugf("UpdateDentistData: %v", result.RowsAffected)
 	return nil
@@ -92,7 +92,7 @@ func (r *dentistPosgresRepository) DeleteDentistData(id *uint64) error {
 	result := r.db.Model(&entities.Dentist{}).Where("id = ?", *id).Where("status <> ?", "Removed").Update("status", "Removed")
 	if result.Error != nil {
 		log.Errorf("DeleteDentistData:%v", result.Error)
-		return &dentistError.ServerInternalError{Err: result.Error}
+		return result.Error
 	}
 	log.Debugf("DeleteDentistData: %v", result.RowsAffected)
 	return nil

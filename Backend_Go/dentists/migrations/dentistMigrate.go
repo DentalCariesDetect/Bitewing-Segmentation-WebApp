@@ -13,5 +13,5 @@ func main() {
 }
 
 func dentistMigrate(db database.Database) {
-	db.GetDb().AutoMigrate(&entities.Dentist{})
+	db.GetDb().Migrator().CreateTable(&entities.Dentist{})
 }
