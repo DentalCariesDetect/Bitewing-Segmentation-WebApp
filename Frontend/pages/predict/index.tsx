@@ -24,7 +24,7 @@ export default function Predict() {
         <div className="flex w-full h-screen items-center justify-center ">
           <UploadFile />
         </div>
-
+        {/* Hello */}
       </div>
     </div>
   );
