@@ -1,12 +1,12 @@
-import { Inter } from "next/font/google";
 import { useState } from 'react';
-import UploadFile from "@/components/uploadFile";
+import router from 'next/router';
 import Transition from "@/components/Transitions";
 import NavbarMobile from "@/components/NavbarMobile";
 import NavbarDesktop from "@/components/NavbarDesktop";
 import { motion } from "framer-motion";
 import Image from 'next/image';
 import { fadeIn } from "@/variants";
+import Modal from "@/components/Modal";
 
 
 export default function Predict() {
@@ -16,6 +16,8 @@ export default function Predict() {
     const [age, setAge] = useState('');
     const [profileImage, setProfileImage] = useState(null);
     const [previewImage, setPreviewImage] = useState('');
+    const [openConfirm, setOpenConfirm] = useState(false)
+    const [openPredict, setOpenPredict] = useState(false)
 
     // Handle form submission
     const handleSubmit = (e: any) => {
@@ -37,6 +39,23 @@ export default function Predict() {
     };
     return (
         <div className="h-full">
+            <Modal
+                isOpen={openConfirm}
+                setIsOpen={setOpenConfirm}
+                title="Add patient detail"
+                message="Are you sure you want to add patient detail?"
+                onUnderstood={() => setOpenPredict(true)}
+                status={"info"}
+            />
+
+            <Modal
+                isOpen={openPredict}
+                setIsOpen={setOpenPredict}
+                title="Predict now"
+                message="Are you want to predict now"
+                onUnderstood={() => router.push('/predictDentist/predict')}
+                status={"info"}
+            />
             <Transition />
             <div className="block md:hidden">
                 <NavbarMobile />
@@ -98,10 +117,12 @@ export default function Predict() {
                                 <button className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                     Decline
                                 </button>
-                                <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                    Acceapt
+                                <button onClick={() => setOpenConfirm(true)} type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    Accept
                                 </button>
                             </div>
+
+
                         </form>
                     </motion.div>
                 </div>

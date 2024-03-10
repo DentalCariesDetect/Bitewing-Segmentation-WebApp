@@ -1,39 +1,160 @@
-import React, { useState } from 'react'; // Ensure React is imported for JSX usage and useState is available
-import Link from "next/link";
+import React from 'react';
 import { SideBar } from "@/components/SideBar";
 import Transition from "@/components/Transitions";
+import ReactECharts from 'echarts-for-react';
 
+interface SettingCardProps {
+    title: string;
+    description: string;
+}
 
+// Line Chart Component
+const LineChart = () => {
+    const option = {
+        title: {
+            text: 'Line Chart Example',
+            textStyle: {
+                color: '#fff', // Set title text color to white
+            }
+        },
+        xAxis: {
+            type: 'category',
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        },
+        yAxis: {
+            type: 'value',
+        },
+        series: [
+            {
+                data: [820, 932, 901, 934, 1290, 1330, 1320],
+                type: 'line',
+            },
+        ],
+    };
 
-export default function ProfileSetting() {
+    return <ReactECharts option={option} />;
+};
 
+// Bar Chart Component
+const BarChart = () => {
+    const option = {
+        title: {
+            text: 'Bar Chart Example',
+            textStyle: {
+                color: '#fff', // Set title text color to white
+            }
+        },
+        xAxis: {
+            type: 'category',
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        },
+        yAxis: {
+            type: 'value',
+        },
+        series: [
+            {
+                data: [120, 200, 150, 80, 70, 110, 130],
+                type: 'bar',
+            },
+        ],
+    };
 
+    return <ReactECharts option={option} />;
+};
+
+// Pie Chart Component
+const PieChart = () => {
+    const option = {
+        title: {
+            text: 'Pie Chart Example',
+            left: 'center',
+            textStyle: {
+                color: '#fff', // Set title text color to white
+            }
+        },
+        series: [
+            {
+                name: 'Access From',
+                type: 'pie',
+                radius: '50%',
+                data: [
+                    { value: 1048, name: 'Search Engine' },
+                    { value: 735, name: 'Direct' },
+                    { value: 580, name: 'Email' },
+                    { value: 484, name: 'Union Ads' },
+                    { value: 300, name: 'Video Ads' },
+                ],
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)',
+                    },
+                },
+            },
+        ],
+    };
+
+    return <ReactECharts option={option} />;
+};
+
+export default function DashboardMain() {
     return (
-        <div className="w-full h-screen">
-            <div className="bg-gradient-background h-full flex items-center justify-between">
-                <SideBar />
-                <div className=' flex flex-col space-y-5'>
-                    <div>
-                        <div className=' w-full h-60 bg-black rounded-xl'>
-                            Hello
-                        </div>
-                    </div>
-                    <div className=' flex flex-row space-x-5 '>
-                        <div className=' w-[300px] h-32 bg-black rounded-xl'>
-                            Hello
-                        </div>
-                        <div className=' w-[300px] h-32 bg-black rounded-xl'>
-                            Hello
-                        </div>
-                        <div className=' w-[300px] h-32 bg-black rounded-xl'>
-                            Hello
-                        </div>
-                    </div>
+        <div className="w-full h-screen flex bg-violet-800">
+            {/* Sidebar */}
+            <SideBar />
 
+            {/* Main Content */}
+            <div className="flex-grow p-8 overflow-auto">
+                <Transition />
+
+                {/* User Profile Area */}
+                <div className='bg-gray-700 rounded-xl shadow-lg text-white p-6 mb-8'>
+                    <div className='flex items-center space-x-4 mb-4'>
+                        <div className='w-20 h-20 bg-gray-500 rounded-full flex items-center justify-center text-2xl'>JD</div>
+                        <div>
+                            <h2 className='text-2xl font-bold'>John Doe</h2>
+                            <p className='text-gray-300'>johndoe@example.com</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 className='text-xl font-semibold mb-2'>Account Details</h3>
+                        <p className='text-gray-300'>Manage your personal information</p>
+                    </div>
                 </div>
-                <div></div>
+
+                {/* Additional Settings */}
+                <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mb-8'>
+                    <SettingCard title="Setting 1" description="Adjust your preferences" />
+                    <SettingCard title="Setting 2" description="Notification settings" />
+                    <SettingCard title="Setting 3" description="Privacy options" />
+                </div>
+
+                <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+                    <div className='bg-gray-700 rounded-xl shadow-lg p-4 text-white flex flex-col h-full'>
+                        <LineChart />
+                    </div>
+                    <div className='bg-gray-700 rounded-xl shadow-lg p-4 text-white flex flex-col h-full'>
+                        <BarChart />
+                    </div>
+                    <div className='bg-gray-700 rounded-xl shadow-lg p-4 text-white flex flex-col h-full'>
+                        <PieChart />
+                    </div>
+                </div>
             </div>
         </div>
+    );
+}
 
+// Additional functional component for settings cards
+function SettingCard({ title, description }: SettingCardProps) {
+    return (
+        <div className='bg-gray-700 rounded-xl shadow-lg p-4 text-white flex flex-col'>
+            <h4 className='text-lg font-semibold mb-2'>{title}</h4>
+            <p className='flex-1 text-gray-300'>{description}</p>
+            <button className='mt-4 py-2 px-4 bg-violet-600 hover:bg-violet-500 rounded transition duration-200'>
+                Edit
+            </button>
+        </div>
     );
 }

@@ -1,13 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import Dropdown from "./Dropdown";
+import DetailsModal from "./DetailsModal"; // Import the DetailsModal component
 
 interface ImageTableProps {
     images: string[];
 }
 
+interface ToothDetails {
+    index: number | null;
+    imageUrl?: string; // Include an imageUrl property
+    details: string;
+}
+
 const ImageTable: React.FC<ImageTableProps> = ({ images }) => {
     const [selectedImages, setSelectedImages] = useState<boolean[]>(Array(images.length).fill(false));
+    const [detailsModalOpen, setDetailsModalOpen] = useState(false);
+    const [currentToothDetails, setCurrentToothDetails] = useState<ToothDetails>({ index: null, details: "", imageUrl: undefined });
 
     useEffect(() => {
         setSelectedImages(Array(images.length).fill(false));
@@ -19,38 +27,58 @@ const ImageTable: React.FC<ImageTableProps> = ({ images }) => {
         setSelectedImages(newSelectedImages);
     };
 
+    const openDetailsModal = (index: number) => {
+        setCurrentToothDetails({ index, details: "", imageUrl: images[index] }); // Set the imageUrl here
+        setDetailsModalOpen(true);
+    };
+
+    const saveToothDetails = (details: string) => {
+        // Save logic here
+        setCurrentToothDetails({ ...currentToothDetails, details });
+        setDetailsModalOpen(false);
+    };
+
     return (
-        <div className="bg-indigo-600 p-4 w-full ">
-            <div className="flex flex-row space-x-5">
-                <div className=" ">
-                    {images.map((img, index) => (
-                        <div key={index} className="flex  mb-4 border border-white w-80 p-3 rounded-lg">
-                            <input
-                                type="checkbox"
-                                checked={selectedImages[index] || false} // Handle potential undefined values
-                                onChange={(e) => onImageSelect(index, e.target.checked)}
-                                className="mr-2"
-                            />
-                            <Image
-                                src={img}
-                                alt="Preview"
-                                width={100}
-                                height={100}
-                                className="max-w-xs rounded-md"
-                            />
-                            <div className=" w-full ml-2">
-                                <h1>Class 31</h1>
-                                <p>confident : 0.99</p>
+        <div className="bg-indigo-600 p-4 w-full">
+            <div className="flex space-x-5">
+                <div className="flex flex-row">
+                    <div>
+                        {images.map((img, index) => (
+                            <div key={index} className="flex mb-4 border border-white w-80 p-3 rounded-lg">
+                                <input
+                                    type="checkbox"
+                                    checked={selectedImages[index] || false}
+                                    onChange={(e) => onImageSelect(index, e.target.checked)}
+                                    className="mr-2"
+                                />
+                                <Image
+                                    src={img}
+                                    alt="Tooth Preview"
+                                    width={100}
+                                    height={100}
+                                    className="max-w-xs rounded-md"
+                                />
+                                <div className="w-full ml-2">
+                                    <h1>Class 31</h1>
+                                    <p>confidence: 0.99</p>
+                                </div>
+                                <button onClick={() => openDetailsModal(index)} className="flex justify-end items-end underline">
+                                    แก้ไข
+                                </button>
                             </div>
-                            <button className="flex justify-end items-end underline">แก้ไข</button>
-
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
-                <div className=" flex flex-col">
-                    {/* Description box */}
-
-                </div>
+                {detailsModalOpen && (
+                    <DetailsModal
+                        isOpen={detailsModalOpen}
+                        imageUrl={currentToothDetails.imageUrl} // Pass the imageUrl to the modal
+                        details={currentToothDetails.details}
+                        onSave={() => saveToothDetails(currentToothDetails.details)}
+                        onCancel={() => setDetailsModalOpen(false)}
+                        onDetailsChange={(details) => setCurrentToothDetails({ ...currentToothDetails, details })}
+                    />
+                )}
             </div>
         </div>
     );

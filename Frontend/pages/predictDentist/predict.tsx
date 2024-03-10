@@ -15,7 +15,7 @@ export default function Predict() {
                 <NavbarDesktop />
             </div>
 
-            <div className="bg-gradient-background h-full flex flex-col  sm:flex-col  items-center justify-center">
+            <div className="bg-gradient-background h-full flex flex-col  sm:flex-col  items-center justify-center min-h-screen">
                 <div className="flex flex-col sm:flex-row space-x-2 mt-5 w-full items-center justify-center">
                     <input
                         className="rounded-md px-5 py-2 bg-inherit border mb-6 "
