@@ -4,8 +4,9 @@ import (
 	"segmentation/segmentation/entities"
 	segmentationError "segmentation/segmentation/errors"
 
-	"github.com/labstack/gommon/log"
+	"time"
 
+	"github.com/labstack/gommon/log"
 	"gorm.io/gorm"
 )
 
@@ -65,8 +66,10 @@ func (r *bitewingPosgresRepository) UpdateBitewingData(in *entities.Bitewing) er
 }
 
 func (r *bitewingPosgresRepository) DeleteBitewingData(id *uint64) error {
-	result := r.db.Model(&entities.Bitewing{}).Where("id = ?", *id).Where("status <> ?", "Removed").Update("status", "Removed")
-
+	result := r.db.Model(&entities.Bitewing{}).Where("id = ?", *id).Where("status <> ?", "Removed").Updates(map[string]interface{}{
+		"status":     "Removed",
+		"deleted_at": time.Now(),
+	})
 	if result.Error != nil {
 		log.Errorf("DeleteDentistData:%v", result.Error)
 		return result.Error

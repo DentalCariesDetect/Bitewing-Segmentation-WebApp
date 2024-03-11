@@ -46,7 +46,6 @@ func (u *patientUsecaseImpl) GetPatientById(id *string) (*models.PatientModel, e
 	}
 	patientModel := &models.PatientModel{
 		ID:        uint64(patientData.ID),
-		DentistID: uint64(patientData.DentistID),
 		BirthDate: patientData.BirthDate,
 		Gender:    patientData.Gender,
 		Age:       patientData.Age,
@@ -64,7 +63,6 @@ func (u *patientUsecaseImpl) GetPatientsByDentist(dentistId *string) ([]*models.
 	for _, patient := range patients {
 		patientModel := &models.PatientModel{
 			ID:        uint64(patient.ID),
-			DentistID: uint64(patient.DentistID),
 			BirthDate: patient.BirthDate,
 			Gender:    patient.Gender,
 			Age:       patient.Age,

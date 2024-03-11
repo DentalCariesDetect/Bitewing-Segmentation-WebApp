@@ -65,6 +65,7 @@ class SegmentationService:
             }
             list_tooth_id.append(tooth_data)
         data_response ={
+            "segmentation_id": result_id,
             "bitewing_id": bitewing_id,
             "bitewing_url": segmentation_request.bitewing_path,
             "list_tooth": list_tooth_id

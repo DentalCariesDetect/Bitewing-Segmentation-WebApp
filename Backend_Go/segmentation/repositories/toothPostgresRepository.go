@@ -3,6 +3,7 @@ package repositories
 import (
 	"segmentation/segmentation/entities"
 	segmentationError "segmentation/segmentation/errors"
+	"time"
 
 	"github.com/labstack/gommon/log"
 
@@ -30,10 +31,31 @@ func (r *toothPosgresRepository) Search(key string, value *string) (bool, error)
 		}
 	}
 }
+func (r *toothPosgresRepository) SearchWithResultId(key string, value *string, resultId *string) (bool, error) {
+	tooth := new(entities.Tooth)
+	result := r.db.Where(key+"= ?", *value).Where("status <> ?", "Removed").Where("result_id = ?", *resultId).Limit(1).Find(tooth)
+	if result.RowsAffected > 0 {
+		return true, nil
+	} else {
+		if result.Error != nil {
+			return false, &segmentationError.ServerInternalError{Err: result.Error}
+		} else {
+			return false, nil
+		}
+	}
+}
 
 func (r *toothPosgresRepository) GetToothDataByKey(key string, value *string) (*entities.Tooth, error) {
 	tooth := new(entities.Tooth)
-	dentist_data := r.db.Where(key+"= ?", *value).Where("status <> ?", "Removed").First(tooth)
+	dentist_data := r.db.Where(key+"= ?", *value).Where("status <> ?", "Removed").Preload("Image").First(tooth)
+	if dentist_data.Error != nil {
+		return nil, &segmentationError.ServerInternalError{Err: dentist_data.Error}
+	}
+	return tooth, nil
+}
+func (r *toothPosgresRepository) GetTeethDataByKey(key string, value *string) ([]*entities.Tooth, error) {
+	tooth := []*entities.Tooth{}
+	dentist_data := r.db.Where(key+"= ?", *value).Where("status <> ?", "Removed").Preload("Image").Find(&tooth)
 	if dentist_data.Error != nil {
 		return nil, &segmentationError.ServerInternalError{Err: dentist_data.Error}
 	}
@@ -65,7 +87,10 @@ func (r *toothPosgresRepository) UpdateToothData(in *entities.Tooth) error {
 }
 
 func (r *toothPosgresRepository) DeleteToothData(id *uint64) error {
-	result := r.db.Model(&entities.Tooth{}).Where("id = ?", *id).Where("status <> ?", "Removed").Update("status", "Removed")
+	result := r.db.Model(&entities.Tooth{}).Where("id = ?", *id).Where("status <> ?", "Removed").Updates(map[string]interface{}{
+		"status":     "Removed",
+		"deleted_at": time.Now(),
+	})
 
 	if result.Error != nil {
 		log.Errorf("DeleteDentistData:%v", result.Error)

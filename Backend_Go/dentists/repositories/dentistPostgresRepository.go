@@ -3,6 +3,8 @@ package repositories
 import (
 	"segmentation/dentists/entities"
 	dentistError "segmentation/dentists/errors"
+	segmentation "segmentation/segmentation/entities"
+	"time"
 
 	"github.com/labstack/gommon/log"
 
@@ -89,11 +91,22 @@ func (r *dentistPosgresRepository) UpdateDentistData(in *entities.UpdateDentist,
 }
 
 func (r *dentistPosgresRepository) DeleteDentistData(id *uint64) error {
-	result := r.db.Model(&entities.Dentist{}).Where("id = ?", *id).Where("status <> ?", "Removed").Update("status", "Removed")
+	result := r.db.Model(&entities.Dentist{}).Where("id = ?", *id).Where("status <> ?", "Removed").Updates(map[string]interface{}{
+		"status":     "Removed",
+		"deleted_at": time.Now(),
+	})
 	if result.Error != nil {
 		log.Errorf("DeleteDentistData:%v", result.Error)
 		return &dentistError.ServerInternalError{Err: result.Error}
 	}
 	log.Debugf("DeleteDentistData: %v", result.RowsAffected)
+	result = r.db.Model(&segmentation.Result{}).Where("dentist_id = ?", *id).Where("status <> ?", "Removed").Updates(map[string]interface{}{
+		"status":     "Removed",
+		"deleted_at": time.Now(),
+	})
+	if result.Error != nil {
+		log.Errorf("DeleteDentistData:%v", result.Error)
+		return &dentistError.ServerInternalError{Err: result.Error}
+	}
 	return nil
 }

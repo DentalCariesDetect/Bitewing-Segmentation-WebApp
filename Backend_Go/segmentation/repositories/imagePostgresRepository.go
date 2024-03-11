@@ -3,6 +3,7 @@ package repositories
 import (
 	"segmentation/segmentation/entities"
 	segmentationError "segmentation/segmentation/errors"
+	"time"
 
 	"github.com/labstack/gommon/log"
 
@@ -65,7 +66,10 @@ func (r *imagePosgresRepository) UpdateImageData(in *entities.Image) error {
 }
 
 func (r *imagePosgresRepository) DeleteImageData(id *uint64) error {
-	result := r.db.Model(&entities.Image{}).Where("id = ?", *id).Where("status <> ?", "Removed").Update("status", "Removed")
+	result := r.db.Model(&entities.Image{}).Where("id = ?", *id).Where("status <> ?", "Removed").Updates(map[string]interface{}{
+		"status":     "Removed",
+		"deleted_at": time.Now(),
+	})
 
 	if result.Error != nil {
 		log.Errorf("DeleteDentistData:%v", result.Error)

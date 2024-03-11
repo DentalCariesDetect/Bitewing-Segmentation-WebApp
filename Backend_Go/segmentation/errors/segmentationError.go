@@ -13,8 +13,14 @@ func (e *ServerInternalError) Error() string {
 	return "server internal error: " + e.Err.Error()
 }
 
-type SegmentationNotFoundError struct{}
+type ResultNotFoundError struct{}
 
-func (e *SegmentationNotFoundError) Error() string {
-	return "Segmentation not found"
+func (e *ResultNotFoundError) Error() string {
+	return "Result not found"
+}
+
+type ToothNotFoundError struct{}
+
+func (e *ToothNotFoundError) Error() string {
+	return "Tooth not found"
 }

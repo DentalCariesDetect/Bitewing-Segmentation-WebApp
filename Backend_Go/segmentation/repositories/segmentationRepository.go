@@ -20,7 +20,8 @@ type BitewingRepository interface {
 
 type ResultRepository interface {
 	Search(key string, value *string) (bool, error)
-	GetResultDataByKey(key string, value *string) (*entities.Result, error)
+	GetResultDataByKey(key string, value *string, preload bool) (*entities.Result, error)
+	GetResultsDataByKey(key string, value *string, preload bool) ([]*entities.Result, error)
 	InsertResultData(in *entities.Result) error
 	UpdateResultData(in *entities.Result) error
 	DeleteResultData(id *uint64) error
@@ -28,7 +29,9 @@ type ResultRepository interface {
 
 type ToothRepository interface {
 	Search(key string, value *string) (bool, error)
+	SearchWithResultId(key string, value *string, resultId *string) (bool, error)
 	GetToothDataByKey(key string, value *string) (*entities.Tooth, error)
+	GetTeethDataByKey(key string, value *string) ([]*entities.Tooth, error)
 	InsertToothData(in *entities.Tooth) error
 	UpdateToothData(in *entities.Tooth) error
 	DeleteToothData(id *uint64) error

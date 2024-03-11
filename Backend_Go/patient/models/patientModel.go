@@ -7,7 +7,6 @@ type (
 		Gender    string  `json:"gender"`
 		Age       uint64  `json:"age"`
 		Phone     *string `json:"phone"`
-		DentistID uint64  `json:"dentist_id"`
 	}
 
 	PatientInsertModel struct {
