@@ -113,14 +113,14 @@ export default function DashboardMain() {
                 <div className='bg-gray-700 rounded-xl shadow-lg text-white p-6 mb-8 '>
                     <div className='flex items-center space-x-4 mb-4'>
                         <div className='w-20 h-20 bg-gray-500 rounded-full flex items-center justify-center text-2xl'>
-                            {/* <Image
-                                src=""
-                                width={500}
-                                height={500}
+                            <Image
+                                src="/image/1686616127235.jpeg"
+                                width={100}
+                                height={100}
                                 alt="Preview"
-                                className="mb-4 max-w-xs rounded-md"
-                            /> */}
-                            JD
+                                className="w-20 h-20 rounded-full"
+
+                            />
                         </div>
                         <div>
                             <h2 className='text-2xl font-bold'>John Doe</h2>

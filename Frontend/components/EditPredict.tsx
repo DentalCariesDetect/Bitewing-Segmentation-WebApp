@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 interface UserDetails {
     name: string;
@@ -29,8 +30,12 @@ const EditPredict: React.FC<EditPredict> = ({ isOpen, setIsOpen, initialUserDeta
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50">
-            <div className="w-full max-w-lg p-8 space-y-6 bg-white rounded-lg shadow-2xl">
-                <div className="flex flex-col gap-4">
+
+            <div className="w-full max-w-lg p-8 space-y-6 bg-white flex items-center justify-center flex-col rounded-lg shadow-2xl">
+                <div className="text-black">
+                    <h1>Predict page</h1>
+                </div>
+                {/* <div className="flex flex-col gap-4">
                     {Object.entries(editedUser).map(([key, value]) => (
                         <div key={key}>
                             <label htmlFor={key} className="block mb-2 text-sm font-medium text-gray-900 capitalize">{key}</label>
@@ -45,6 +50,16 @@ const EditPredict: React.FC<EditPredict> = ({ isOpen, setIsOpen, initialUserDeta
                             />
                         </div>
                     ))}
+                </div> */}
+                <div className='w-96 h-96 bg-gray-500 rounded-full flex items-center justify-center text-2xl'>
+                    <Image
+                        src="/image/cropped-image.jpeg"
+                        width={100}
+                        height={100}
+                        alt="Preview"
+                        className=" w-96 h-96 rounded-lg"
+
+                    />
                 </div>
                 <div className="flex justify-end gap-2 mt-4">
                     <button
@@ -60,7 +75,7 @@ const EditPredict: React.FC<EditPredict> = ({ isOpen, setIsOpen, initialUserDeta
                         }}
                         className="px-5 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                     >
-                        Save
+                        Predict again
                     </button>
                 </div>
             </div>
