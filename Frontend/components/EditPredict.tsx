@@ -7,7 +7,7 @@ interface UserDetails {
     phonenumber: string;
 }
 
-interface EditModalProps {
+interface EditPredict {
     isOpen: boolean;
     setIsOpen: (isOpen: boolean) => void;
     initialUserDetails: UserDetails;
@@ -16,7 +16,7 @@ interface EditModalProps {
 
 
 
-const EditModal: React.FC<EditModalProps> = ({ isOpen, setIsOpen, initialUserDetails, onSave }) => {
+const EditPredict: React.FC<EditPredict> = ({ isOpen, setIsOpen, initialUserDetails, onSave }) => {
     const [editedUser, setEditedUser] = useState<UserDetails>(initialUserDetails);
 
     useEffect(() => {
@@ -68,6 +68,4 @@ const EditModal: React.FC<EditModalProps> = ({ isOpen, setIsOpen, initialUserDet
     );
 };
 
-export default EditModal;
-
-
+export default EditPredict;

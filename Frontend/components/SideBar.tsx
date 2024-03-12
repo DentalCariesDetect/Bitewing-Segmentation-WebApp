@@ -21,8 +21,6 @@ import Modal from "./Modal";
 import router from 'next/router';
 
 export function SideBar() {
-    const [open, setOpen] = React.useState(0);
-    const [openAlert, setOpenAlert] = React.useState(true);
     // logout popup state
     const [openLogout, setOpenLogout] = React.useState(false);
 

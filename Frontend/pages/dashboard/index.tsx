@@ -2,6 +2,7 @@ import React from 'react';
 import { SideBar } from "@/components/SideBar";
 import Transition from "@/components/Transitions";
 import ReactECharts from 'echarts-for-react';
+import Image from 'next/image';
 
 interface SettingCardProps {
     title: string;
@@ -12,7 +13,7 @@ interface SettingCardProps {
 const LineChart = () => {
     const option = {
         title: {
-            text: 'Line Chart Example',
+            text: 'Predict Rate',
             textStyle: {
                 color: '#fff', // Set title text color to white
             }
@@ -39,7 +40,7 @@ const LineChart = () => {
 const BarChart = () => {
     const option = {
         title: {
-            text: 'Bar Chart Example',
+            text: 'Predict per day',
             textStyle: {
                 color: '#fff', // Set title text color to white
             }
@@ -66,7 +67,7 @@ const BarChart = () => {
 const PieChart = () => {
     const option = {
         title: {
-            text: 'Pie Chart Example',
+            text: 'Gender',
             left: 'center',
             textStyle: {
                 color: '#fff', // Set title text color to white
@@ -78,11 +79,11 @@ const PieChart = () => {
                 type: 'pie',
                 radius: '50%',
                 data: [
-                    { value: 1048, name: 'Search Engine' },
-                    { value: 735, name: 'Direct' },
-                    { value: 580, name: 'Email' },
-                    { value: 484, name: 'Union Ads' },
-                    { value: 300, name: 'Video Ads' },
+                    { value: 1048, name: 'Female' },
+                    { value: 735, name: 'Male' },
+                    // { value: 580, name: 'Email' },
+                    // { value: 484, name: 'Union Ads' },
+                    // { value: 300, name: 'Video Ads' },
                 ],
                 emphasis: {
                     itemStyle: {
@@ -100,18 +101,27 @@ const PieChart = () => {
 
 export default function DashboardMain() {
     return (
-        <div className="w-full h-screen flex bg-gradient-background">
+        <div className="w-full h-screen flex bg-gradient-background items-center ">
             {/* Sidebar */}
             <SideBar />
 
             {/* Main Content */}
-            <div className="flex-grow p-8 overflow-auto">
+            <div className="flex-grow p-8 overflow-auto ">
                 <Transition />
 
                 {/* User Profile Area */}
-                <div className='bg-gray-700 rounded-xl shadow-lg text-white p-6 mb-8'>
+                <div className='bg-gray-700 rounded-xl shadow-lg text-white p-6 mb-8 '>
                     <div className='flex items-center space-x-4 mb-4'>
-                        <div className='w-20 h-20 bg-gray-500 rounded-full flex items-center justify-center text-2xl'>JD</div>
+                        <div className='w-20 h-20 bg-gray-500 rounded-full flex items-center justify-center text-2xl'>
+                            {/* <Image
+                                src=""
+                                width={500}
+                                height={500}
+                                alt="Preview"
+                                className="mb-4 max-w-xs rounded-md"
+                            /> */}
+                            JD
+                        </div>
                         <div>
                             <h2 className='text-2xl font-bold'>John Doe</h2>
                             <p className='text-gray-300'>johndoe@example.com</p>

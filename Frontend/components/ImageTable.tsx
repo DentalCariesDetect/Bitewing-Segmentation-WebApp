@@ -33,7 +33,6 @@ const ImageTable: React.FC<ImageTableProps> = ({ images }) => {
     };
 
     const saveToothDetails = (details: string) => {
-        // Save logic here
         setCurrentToothDetails({ ...currentToothDetails, details });
         setDetailsModalOpen(false);
     };
@@ -68,7 +67,9 @@ const ImageTable: React.FC<ImageTableProps> = ({ images }) => {
                             </div>
                         ))}
                     </div>
+
                 </div>
+
                 {detailsModalOpen && (
                     <DetailsModal
                         isOpen={detailsModalOpen}

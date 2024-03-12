@@ -177,6 +177,15 @@ const UploadFile = () => {
                 />
 
             </div>
+            {listCropImg && (
+                <button
+                    onClick={() => {
+                        setOpenModal(true)
+                    }}
+                    className=" mt-5 px-6 py-2 text-black bg-white rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                >
+                    SAVE PREDICT IMAGE
+                </button>)}
 
             <button
                 onClick={() => {

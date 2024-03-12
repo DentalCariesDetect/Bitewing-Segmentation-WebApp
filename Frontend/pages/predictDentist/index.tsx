@@ -64,8 +64,9 @@ export default function Predict() {
                 <NavbarDesktop />
             </div>
 
-            <div className="bg-gradient-background h-full flex flex-col  sm:flex-col  items-center justify-center">
-                <div className="flex flex-col sm:flex-row space-x-2 mt-5 w-full h-screen items-center justify-center">
+            <div className="bg-gradient-background min-h-screen h-full flex flex-col  sm:flex-col  items-center justify-center">
+                <h1 className='text-3xl'>Add patient detail</h1>
+                <div className="flex sm:flex-row space-x-2 mt-5 w-full items-center justify-center ">
                     <motion.div
                         variants={fadeIn('right', 0.05)}
                         initial="hidden"
@@ -74,6 +75,7 @@ export default function Predict() {
                         className="w-[500px] h-[570px] bg-blue-900 p-8 rounded-xl">
                         {/* Profile setting page */}
                         <form onSubmit={handleSubmit} className="space-y-5">
+
                             {/* Profile Image Upload */}
                             <div className="flex flex-col items-center">
                                 <label htmlFor="profileImage" className="cursor-pointer">
@@ -114,7 +116,7 @@ export default function Predict() {
 
                             {/* Submit Button */}
                             <div className=" translate-y-5 flex flex-row space-x-5">
-                                <button className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                <button onClick={() => router.push('../dashboard/historyDashboard')} className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                     Decline
                                 </button>
                                 <button onClick={() => setOpenConfirm(true)} type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">

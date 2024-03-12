@@ -16,8 +16,9 @@ import {
 import { motion } from 'framer-motion';
 import { fadeIn } from '@/variants';
 import Link from "next/link";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import EditModal from '../../components/EditModal';
+import EditPredict from "@/components/EditPredict";
 
 interface UserDetails {
     name: string;
@@ -37,10 +38,18 @@ export default function HistoryDashboard() {
         phonenumber: '',
     });
 
+    const [isEditPredictOpen, setEditPredictOpen] = useState(false);
+
+
+    const handleModalPredictClick = (index: number, userDetails: any) => {
+        setEditPredictOpen(true);
+    };
+
     const handleEditClick = (index: number, userDetails: any) => {
         setCurrentUserDetails(userDetails); // Set current user details to edit
-        setIsEditModalOpen(true); // Open the modal
+        // Open the modal
         setEditedPatientIndex(index); // Set the index of the edited patient
+        setIsEditModalOpen(true);
     };
 
     const handleSaveEdit = (newDetails: UserDetails) => {
@@ -53,7 +62,7 @@ export default function HistoryDashboard() {
     };
 
 
-    const TABLE_HEAD = ["Patient ID", "Gender", "Age", "Phone", "Edit", ""];
+    const TABLE_HEAD = ["Patient ID", "Gender", "Age", "Phone", "Predict Image", "Edit"];
 
     const [TABLE_ROWS, setTABLE_ROWS] = useState<Array<any>>([
         {
@@ -103,7 +112,16 @@ export default function HistoryDashboard() {
         },
     ]);
 
-
+    useEffect(() => {
+        if (TABLE_ROWS.length > 0) {
+            setCurrentUserDetails({
+                name: TABLE_ROWS[0].name,
+                email: TABLE_ROWS[0].email,
+                gender: TABLE_ROWS[0].gender,
+                phonenumber: TABLE_ROWS[0].phonenumber,
+            });
+        }
+    }, [TABLE_ROWS]);
 
 
     return (
@@ -120,6 +138,13 @@ export default function HistoryDashboard() {
                     setIsOpen={setIsEditModalOpen}
                     initialUserDetails={currentUserDetails} // Pass initial user details to the modal
                     onSave={handleSaveEdit} // Pass onSave function to the modal
+                />
+
+                <EditPredict
+                    isOpen={isEditPredictOpen}
+                    setIsOpen={setEditPredictOpen}
+                    initialUserDetails={currentUserDetails} // Pass initial user details to the modal
+                    onSave={handleSaveEdit} // Pass onSave function to the modal  
                 />
 
                 <motion.div
@@ -230,6 +255,12 @@ export default function HistoryDashboard() {
                                                     </Typography>
                                                 </td>
                                                 <td className={classes}>
+                                                    <button onClick={() => handleModalPredictClick(index, { img, name, email, gender, phonenumber })} className=" w-32 h-7 bg-white rounded-md text-black text-center">
+                                                        <h1>Predict Image</h1>
+                                                    </button>
+
+                                                </td>
+                                                <td className={classes}>
                                                     <Tooltip content="Edit User">
                                                         <IconButton variant="text" onClick={() => handleEditClick(index, { img, name, email, gender, phonenumber })}>
                                                             <PencilIcon className="h-4 w-4  text-white" />
@@ -249,10 +280,10 @@ export default function HistoryDashboard() {
                             Page 1 of 10
                         </Typography>
                         <div className="flex gap-2 text-white">
-                            <Button variant="outlined" size="sm">
+                            <Button variant="outlined" size="sm" className="text-white">
                                 Previous
                             </Button>
-                            <Button variant="outlined" size="sm">
+                            <Button variant="outlined" size="sm" className="text-white">
                                 Next
                             </Button>
                         </div>
