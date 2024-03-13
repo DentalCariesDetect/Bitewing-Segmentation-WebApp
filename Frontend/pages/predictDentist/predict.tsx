@@ -35,11 +35,11 @@ export default function Predict() {
 
                     {/* check box  */}
                     <div className="flex items-center justify-center flex-cols -translate-y-3">
-                        <input
+                        {/* <input
                             type="checkbox"
                             className="mr-2"
-                        />
-                        <p className="">วันนี้</p>
+                        /> */}
+                        {/* <p className="">วันนี้</p> */}
                     </div>
                 </div >
                 <div className="flex w-full items-center justify-center ">

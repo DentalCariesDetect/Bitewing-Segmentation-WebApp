@@ -9,6 +9,7 @@ const UploadFile = () => {
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const [listCropImg, setListCropImg] = useState<string[] | null>(null);
     const [openModal, setOpenModal] = useState(false);
+    const [saveModal, setSaveModal] = useState(false);
     const [falseModal, setFalseModal] = useState(false);
     const [modelFail, setModelFail] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -110,6 +111,16 @@ const UploadFile = () => {
             />
 
             <Modal
+                isOpen={saveModal}
+                setIsOpen={setSaveModal}
+                title="Save predict result"
+                message="Are you sure you want to save predict result?"
+                onUnderstood={() => handleUpload()}
+                status={"info"}
+            />
+
+
+            <Modal
                 isOpen={falseModal}
                 setIsOpen={setFalseModal}
                 title="Fail to predict"
@@ -180,7 +191,7 @@ const UploadFile = () => {
             {listCropImg && (
                 <button
                     onClick={() => {
-                        setOpenModal(true)
+                        setSaveModal(true)
                     }}
                     className=" mt-5 px-6 py-2 text-black bg-white rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
                 >

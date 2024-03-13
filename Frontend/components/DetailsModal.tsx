@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+import Dropdown from "./Dropdown";
 
 interface DetailsModalProps {
     isOpen: boolean;
@@ -18,23 +19,39 @@ const DetailsModal: React.FC<DetailsModalProps> = ({
     onCancel,
     onDetailsChange,
 }) => {
-    if (!isOpen) return null;
+    const [toothCariesType, setCariesToothType] = useState("NONE");
+    const [toothCType, setToothCType] = useState("NONE");
+
+    if (!isOpen) return null; // Do not render the modal if it is not open
 
     return (
         <>
             <div className="fixed inset-0 bg-black bg-opacity-50 z-40 w-full -translate-x-5"></div>
-            <div className="modal fixed z-50 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white shadow-lg rounded-lg p-6 text-black max-w-lg w-11/12 md:w-1/2">
-                {imageUrl && (
-                    <div className="mb-4">
-                        <Image
-                            src={imageUrl}
-                            width={200}
-                            height={300}
-                            alt="Preview"
-                            className=" max-h-60 rounded-md object-cover"
-                        />
+            <div className="modal fixed z-50 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white shadow-lg rounded-lg p-6 text-black max-w-lg w-11/12 md:w-1/2 ">
+                <div className="flex flex-row">
+                    {imageUrl && (
+                        <div className="mb-4">
+                            <Image
+                                src={imageUrl}
+                                width={200}
+                                height={300}
+                                alt="Preview"
+                                className="max-h-60 rounded-md object-cover"
+                            />
+                        </div>
+                    )}
+                    <div className="flex flex-col ml-5 mb-5">
+                        <div>
+                            <h1 className="text-md font-bold text-gray-800 mb-4 mt-6 ">Caries type</h1>
+                            <Dropdown options={["NONE", "R0", "RA1-2", "RA3", "RB", "RC"]} selectedOption={toothCariesType} onOptionChange={setCariesToothType} />
+                        </div>
+                        <div>
+                            <h1 className="text-md font-bold text-gray-800 mb-4 mt-6 ">Severity Levels of Dental Caries</h1>
+                            <Dropdown options={["NONE", "CSound", "CInitial", "CModerate", "CExtensive"]} selectedOption={toothCType} onOptionChange={setToothCType} />
+                        </div>
                     </div>
-                )}
+                </div>
+
                 <textarea
                     className="w-full p-3 border border-gray-300 rounded mb-4"
                     value={details}
@@ -62,3 +79,4 @@ const DetailsModal: React.FC<DetailsModalProps> = ({
 };
 
 export default DetailsModal;
+

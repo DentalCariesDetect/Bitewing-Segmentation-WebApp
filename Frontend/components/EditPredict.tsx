@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import router from 'next/router';
 
 interface UserDetails {
     name: string;
@@ -51,7 +52,7 @@ const EditPredict: React.FC<EditPredict> = ({ isOpen, setIsOpen, initialUserDeta
                         </div>
                     ))}
                 </div> */}
-                <div className='w-96 h-96 bg-gray-500 rounded-full flex items-center justify-center text-2xl'>
+                <div className='w-96 h-96 bg-gray-500 rounded-lg flex items-center justify-center text-2xl'>
                     <Image
                         src="/image/cropped-image.jpeg"
                         width={100}
@@ -72,6 +73,7 @@ const EditPredict: React.FC<EditPredict> = ({ isOpen, setIsOpen, initialUserDeta
                         onClick={() => {
                             onSave(editedUser);
                             setIsOpen(false);
+                            router.push('../predictDentist/predict')
                         }}
                         className="px-5 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                     >
