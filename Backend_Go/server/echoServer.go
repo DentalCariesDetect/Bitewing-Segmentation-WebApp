@@ -25,13 +25,27 @@ func NewEchoServer(cfg *configs.Config, db *gorm.DB) Server {
 }
 
 func (s *echoServer) Start() {
-	// initialize routers here
+	// Set up CORS middleware
+	s.app.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"http://localhost:3000"}, // Or the origins you wish to allow
+		AllowMethods: []string{echo.GET, echo.PUT, echo.POST, echo.DELETE, echo.OPTIONS},
+		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+	}))
+
+	// Initialize routers here
 	s.initializeRouters()
+
+	// Set up custom validator
 	s.app.Validator = NewCustomValidator()
+
+	// Set up logger middleware
 	s.app.Use(middleware.Logger())
+
+	// Start the server
 	serverUrl := fmt.Sprintf(":%d", s.cfg.App.Port)
 	s.app.Logger.Fatal(s.app.Start(serverUrl))
 }
+
 
 type CustomValidator struct {
 	validator *validator.Validate
@@ -51,3 +65,4 @@ func NewCustomValidator() *CustomValidator {
 	v.RegisterValidation("gender", genderValidation)
 	return &CustomValidator{validator: v}
 }
+
