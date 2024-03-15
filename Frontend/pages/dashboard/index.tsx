@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SideBar } from "@/components/SideBar";
 import Transition from "@/components/Transitions";
 import ReactECharts from 'echarts-for-react';
 import Image from 'next/image';
+import router from 'next/router';
 
 interface SettingCardProps {
     title: string;
@@ -100,6 +101,18 @@ const PieChart = () => {
 };
 
 export default function DashboardMain() {
+
+    useEffect(() => {
+        // ตรวจสอบ token ใน localStorage
+        const token = localStorage.getItem("token");
+
+        // หากไม่พบ token, เปลี่ยนเส้นทางไปยังหน้าเข้าสู่ระบบหรือหน้า "Page Not Found"
+        if (!token) {
+            // router.push('/login'); // สำหรับเปลี่ยนเส้นทางไปหน้าเข้าสู่ระบบ
+            router.replace('/404'); // หรือใช้ router.replace('/404') สำหรับหน้า "Page Not Found"
+        }
+    }, []);
+
     return (
         <div className="w-full h-screen flex bg-gradient-background items-center ">
             {/* Sidebar */}

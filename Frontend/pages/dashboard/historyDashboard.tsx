@@ -19,6 +19,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from 'react';
 import EditModal from '../../components/EditModal';
 import EditPredict from "@/components/EditPredict";
+import router from "next/router";
 
 interface UserDetails {
     name: string;
@@ -122,6 +123,17 @@ export default function HistoryDashboard() {
             });
         }
     }, [TABLE_ROWS]);
+
+    useEffect(() => {
+        // ตรวจสอบ token ใน localStorage
+        const token = localStorage.getItem("token");
+
+        // หากไม่พบ token, เปลี่ยนเส้นทางไปยังหน้าเข้าสู่ระบบหรือหน้า "Page Not Found"
+        if (!token) {
+            // router.push('/login'); // สำหรับเปลี่ยนเส้นทางไปหน้าเข้าสู่ระบบ
+            router.replace('/404'); // หรือใช้ router.replace('/404') สำหรับหน้า "Page Not Found"
+        }
+    }, []);
 
 
     return (

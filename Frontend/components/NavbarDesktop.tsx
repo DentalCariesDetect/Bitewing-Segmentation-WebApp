@@ -48,7 +48,7 @@ const NavbarDesktop = () => {
                         {isLoggedIn ? (
                             <div className="flex flex-row space-x-2">
                                 <li>
-                                    <Link href="../predict/">
+                                    <Link href="../dashboard/">
                                         <h1 className="text-gray-300 hover:text-white text-sm md:text-base lg:text-lg cursor-pointer">DASHBOARD</h1>
                                     </Link>
                                 </li>

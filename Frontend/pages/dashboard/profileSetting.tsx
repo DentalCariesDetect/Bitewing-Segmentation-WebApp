@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SideBar } from '@/components/SideBar';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { fadeIn } from '@/variants';
 import Transition from '@/components/Transitions';
 import EditModal from '@/components/EditModal';
+import router from 'next/router';
 
 
 export default function ProfileSetting() {
@@ -34,6 +35,17 @@ export default function ProfileSetting() {
             setPreviewImage(URL.createObjectURL(file));
         }
     };
+
+    useEffect(() => {
+        // ตรวจสอบ token ใน localStorage
+        const token = localStorage.getItem("token");
+
+        // หากไม่พบ token, เปลี่ยนเส้นทางไปยังหน้าเข้าสู่ระบบหรือหน้า "Page Not Found"
+        if (!token) {
+            // router.push('/login'); // สำหรับเปลี่ยนเส้นทางไปหน้าเข้าสู่ระบบ
+            router.replace('/404'); // หรือใช้ router.replace('/404') สำหรับหน้า "Page Not Found"
+        }
+    }, []);
 
     return (
         <div className="w-full h-screen">
