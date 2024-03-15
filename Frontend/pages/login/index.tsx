@@ -28,9 +28,11 @@ export default function Login() {
             const data = await response.json();
 
             if (response.ok) {
+                localStorage.setItem('token', data.token);
                 // จัดการกับค่า response เมื่อเข้าสู่ระบบสำเร็จ
                 console.log('Login successful', data);
-                // สามารถ redirect ไปยังหน้าอื่นหรือทำการจัดการ session
+                // Redirect to the main page
+                router.push('/main'); // เปลี่ยนเส้นทางไปยังหน้า main
             } else {
                 // จัดการกับ error ต่างๆ
                 console.error('Login failed', data);

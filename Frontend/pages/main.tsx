@@ -5,6 +5,7 @@ import { fadeIn } from '@/variants';
 import Transition from '@/components/Transitions';
 import NavbarMobile from '@/components/NavbarMobile';
 import NavbarDesktop from '@/components/NavbarDesktop';
+import { useEffect, useState } from 'react';
 
 // import HoverCard from "@/components/HoverCard";
 // import Modal from "@/components/Modal";
@@ -12,6 +13,19 @@ import NavbarDesktop from '@/components/NavbarDesktop';
 // const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // ตรวจสอบว่า token มีอยู่ใน localStorage หรือไม่เมื่อแอปพลิเคชันเริ่มทำงาน
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
+  }, []);
+
+  const handleLogout = () => {
+    // ลบ token ออกจาก localStorage และอัปเดต state
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+  };
   return (
     // Full screen background
     <div className="h-full w-full bg-gradient-background ">
@@ -19,9 +33,29 @@ export default function Home() {
       {/* Navbar  */}
       <div className="block md:hidden">
         <NavbarMobile />
+        {/* {isLoggedIn && (
+          <div className="flex justify-end p-4">
+            <button
+              className="text-white bg-red-500 hover:bg-red-700 rounded px-4 py-2"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
+          </div>
+        )} */}
       </div>
       <div className="hidden md:block">
         <NavbarDesktop />
+        {/* {isLoggedIn && (
+          <div className="flex justify-end p-4">
+            <button
+              className="text-white bg-red-500 hover:bg-red-700 rounded px-4 py-2"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
+          </div>
+        )} */}
       </div>
       <div className=" lg:grid lg:grid-cols-2">
         <div className=" ml-20 lg:mr-0 mr-20 flex flex-col">
