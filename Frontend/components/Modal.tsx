@@ -16,13 +16,13 @@ const Modal: React.FC<ModalProps> = ({ title, message, isOpen, setIsOpen, onUnde
   const getBackgroundStyle = () => {
     switch (status) {
       case 'success':
-        return "bg-gradient-to-br from-green-400 to-green-600";
+        return "bg-gradient-to-br from-blue-400 to-indigo-600"; // Adjusted to blue-indigo gradient
       case 'info':
-        return "bg-gradient-to-br from-violet-600 to-indigo-600";
+        return "bg-gradient-to-br from-violet-600 to-indigo-600"; // Violet-indigo gradient for info
       case 'fail':
-        return "bg-gradient-to-br from-red-400 to-red-600";
+        return "bg-gradient-to-br from-red-600 to-purple-600"; // Red-purple gradient for errors
       default:
-        return "bg-gradient-to-br from-violet-600 to-indigo-600";
+        return "bg-gradient-to-br from-violet-600 to-indigo-600"; // Default to violet-indigo gradient
     }
   };
 
@@ -30,15 +30,16 @@ const Modal: React.FC<ModalProps> = ({ title, message, isOpen, setIsOpen, onUnde
   const Icon = () => {
     switch (status) {
       case 'success':
-        return <FiCheckCircle className="text-green-500" />;
+        return <FiCheckCircle className="text-blue-500" />; // Blue icon for success
       case 'info':
-        return <FiInfo className="text-indigo-600" />;
+        return <FiInfo className="text-indigo-500" />; // Indigo icon for info
       case 'fail':
-        return <FiXCircle className="text-red-500" />;
+        return <FiXCircle className="text-red-500" />; // Red icon for fail
       default:
-        return <FiAlertCircle className="text-indigo-600" />;
+        return <FiAlertCircle className="text-indigo-500" />; // Default to indigo icon
     }
   };
+
 
   return (
     <AnimatePresence>

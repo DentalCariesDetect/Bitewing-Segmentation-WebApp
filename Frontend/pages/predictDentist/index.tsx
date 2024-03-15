@@ -1,13 +1,13 @@
-import { Inter } from "next/font/google";
 import { useState } from 'react';
-import UploadFile from "@/components/uploadFile";
+import router from 'next/router';
 import Transition from "@/components/Transitions";
 import NavbarMobile from "@/components/NavbarMobile";
 import NavbarDesktop from "@/components/NavbarDesktop";
 import { motion } from "framer-motion";
 import Image from 'next/image';
 import { fadeIn } from "@/variants";
-import Link from "next/link";
+import Modal from "@/components/Modal";
+import Link from 'next/link';
 
 
 export default function Predict() {
@@ -17,6 +17,8 @@ export default function Predict() {
     const [age, setAge] = useState('');
     const [profileImage, setProfileImage] = useState(null);
     const [previewImage, setPreviewImage] = useState('');
+    const [openConfirm, setOpenConfirm] = useState(false)
+    const [openPredict, setOpenPredict] = useState(false)
 
     // Handle form submission
     const handleSubmit = (e: any) => {
@@ -38,6 +40,23 @@ export default function Predict() {
     };
     return (
         <div className="h-full">
+            <Modal
+                isOpen={openConfirm}
+                setIsOpen={setOpenConfirm}
+                title="Add patient detail"
+                message="Are you sure you want to add patient detail?"
+                onUnderstood={() => setOpenPredict(true)}
+                status={"info"}
+            />
+
+            <Modal
+                isOpen={openPredict}
+                setIsOpen={setOpenPredict}
+                title="Predict now"
+                message="Are you want to predict now"
+                onUnderstood={() => router.push('/predictDentist/predict')}
+                status={"info"}
+            />
             <Transition />
             <div className="block md:hidden">
                 <NavbarMobile />
@@ -46,8 +65,9 @@ export default function Predict() {
                 <NavbarDesktop />
             </div>
 
-            <div className="bg-gradient-background h-full flex flex-col  sm:flex-col  items-center justify-center">
-                <div className="flex flex-col sm:flex-row space-x-2 mt-5 w-full h-screen items-center justify-center">
+            <div className="bg-gradient-background min-h-screen h-full flex flex-col  sm:flex-col  items-center justify-center">
+                <h1 className='text-3xl'>Add patient detail</h1>
+                <div className="flex sm:flex-row space-x-2 mt-5 w-full items-center justify-center ">
                     <motion.div
                         variants={fadeIn('right', 0.05)}
                         initial="hidden"
@@ -56,6 +76,7 @@ export default function Predict() {
                         className="w-[500px] h-[570px] bg-blue-900 p-8 rounded-xl">
                         {/* Profile setting page */}
                         <form onSubmit={handleSubmit} className="space-y-5">
+
                             {/* Profile Image Upload */}
                             <div className="flex flex-col items-center">
                                 <label htmlFor="profileImage" className="cursor-pointer">
@@ -95,9 +116,12 @@ export default function Predict() {
                             </div>
 
                             {/* Submit Button */}
-                            <div className=" translate-y-5 flex flex-rows space-x-5">
-                                <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-white hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <div className=" translate-y-5 flex flex-row space-x-5">
+                                <button onClick={() => router.push('../dashboard/historyDashboard')} className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                     Decline
+                                </button>
+                                <button onClick={() => setOpenConfirm(true)} type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    Accept
                                 </button>
                                 <Link href="../predictDentist/predictPatient">
                                     <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -105,6 +129,8 @@ export default function Predict() {
                                     </button>
                                 </Link>
                             </div>
+
+
                         </form>
                     </motion.div>
                 </div>

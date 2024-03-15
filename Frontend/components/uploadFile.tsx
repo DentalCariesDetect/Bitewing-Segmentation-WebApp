@@ -58,10 +58,16 @@ const UploadFile = () => {
       }
 
       const responseData = await response.json();
-      setPreviewUrl(`data:image/jpeg;base64,${responseData.data.crop_img}`);
-      if (Array.isArray(responseData.data.list_crop_img)) {
-        const formattedList = responseData.data.list_crop_img.map((item: any) => `data:image/jpeg;base64,${item.base64_image}`);
-        setListCropImg(formattedList);
+      if (responseData.data.crop_img) {
+        // Assuming `responseData.crop_img` is the base64 string of the cropped image
+        // Convert base64 string to an image and set it for preview
+        setPreviewUrl(`data:image/jpeg;base64,${responseData.data.crop_img}`);
+        // console.log(responseData.list_crop_img);
+        if (Array.isArray(responseData.list_crop_img)) {
+          const formattedList = responseData.list_crop_img.map((img: string) => `data:image/jpeg;base64,${img}`);
+          setListCropImg(formattedList);
+        }
+
       }
 
     } catch (error) {
